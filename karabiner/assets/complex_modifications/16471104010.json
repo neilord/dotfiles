@@ -1,0 +1,30 @@
+{
+  "title": "Held Left ⇧ → META",
+  "rules": [
+    {
+      "description": "Held Left ⇧ → META",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_shift",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_command",
+              "modifiers": ["left_control"]
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "left_shift"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

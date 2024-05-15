@@ -1,0 +1,879 @@
+{
+  "title": "Held ⇥ + Key → Yabai Shortcuts",
+  "rules": [
+    {
+      "description": "Held ⇥ + Key → Yabai Shortcuts",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "tab"
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "tab_modifier",
+                "value": 1
+              }
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "shell_command": "/opt/homebrew/bin/sketchybar --bar hidden=off"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "tab"
+            }
+          ],
+          "to_after_key_up": [
+            {
+              "set_variable": {
+                "name": "tab_modifier",
+                "value": 0
+              }
+            },
+            {
+              "shell_command": "/opt/homebrew/bin/sketchybar --bar hidden=on"
+            }
+          ],
+          "parameters": {
+            "basic.to_if_held_down_threshold_milliseconds": 3000
+          }
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "j"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --focus prev"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "k"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --focus next"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "l"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --focus recent"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "f"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m window --toggle float"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "t"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m window --toggle topmost"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "p"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m window --toggle border --toggle sticky --toggle topmost --toggle pip"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "e"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m window --toggle border"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "s"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m window --toggle sticky"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "n"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m window --toggle native-fullscreen"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "m"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m window --toggle zoom-fullscreen"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "comma"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m window --toggle zoom-parent on"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "u"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/toggle_space_float.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "d"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m window --toggle split"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "x"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --mirror x-axis"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "y"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --mirror y-axis"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "r"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/rotate_tree.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "q"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/select_next_window.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "a"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/select_prev_window.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "h"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m window west --resize right:-200:0 2> /dev/null || /usr/local/bin/yabai -m window --resize right:-200:0"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "quote"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m window west --resize right:200:0 2> /dev/null || /usr/local/bin/yabai -m window --resize right:200:0"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "i"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m window north --resize bottom:0:-100 2> /dev/null || /usr/local/bin/yabai -m window --resize bottom:0:-100"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "o"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m window north --resize bottom:0:100 2> /dev/null || /usr/local/bin/yabai -m window --resize bottom:0:100"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "b"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --balance"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "semicolon"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m window --swap mouse"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "1"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --focus 1"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "2"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --focus 2"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "3"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --focus 3"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "4"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --focus 4"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "5"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --focus 5"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "6"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --focus 6"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "7"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --focus 7"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "8"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --focus 8"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "9"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --focus 9"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "0"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --focus 10"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "g"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/send_window_to_created_space.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "v"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/focus_sent_window_on_created_space.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "c"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/focus_created_space.sh; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "z"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --create; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "w"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/destroy_space.sh; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "hyphen"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --move prev; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "equal_sign"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai -m space --move next; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "period",
+            "modifiers": {
+              "mandatory": ["left_shift"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/increase_opacity_by_5.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "period"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/decrease_opacity_by_5.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "slash"
+          },
+          "to": [
+            {
+              "shell_command": "current_opacity=$(/usr/local/bin/yabai -m query --windows --window | /opt/homebrew/bin/jq -re .opacity); [ \"$current_opacity\" = \"1\" ] && /usr/local/bin/yabai -m window --opacity 0.9 || /usr/local/bin/yabai -m window --opacity 1.0"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "grave_accent_and_tilde"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/toggle_focus_follows_mouse.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "tab_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "escape"
+          },
+          "to": [
+            {
+              "shell_command": "/usr/local/bin/yabai --restart-service"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

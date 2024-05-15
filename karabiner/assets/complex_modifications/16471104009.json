@@ -1,0 +1,119 @@
+{
+  "title": "Held ⎵ + ⇪ → jp/en & Held ⎵ ⌘ + ⇥ → ru/en",
+  "rules": [
+    {
+      "description": "Held ⎵ + ⇪ → jp/en",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "input_source_id": "^org\\.unknown\\.keylayout\\.English–Graphite$"
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": {
+              "mandatory": ["left_shift"]
+            }
+          },
+          "to": [
+            {
+              "select_input_source": {
+                "language": "ja"
+              }
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "language": "ja"
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": {
+              "mandatory": ["left_shift"]
+            }
+          },
+          "to": [
+            {
+              "select_input_source": {
+                "input_source_id": "^org\\.unknown\\.keylayout\\.English–Graphite$"
+              }
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Held ⎵ ⌘ + ⇥ → ru/en",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "input_source_id": "^org\\.unknown\\.keylayout\\.English–Graphite$"
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": {
+              "mandatory": ["left_shift", "left_command"]
+            }
+          },
+          "to": [
+            {
+              "select_input_source": {
+                "language": "ru"
+              }
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "conditions": [
+            {
+              "type": "input_source_if",
+              "input_sources": [
+                {
+                  "language": "ru"
+                }
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": {
+              "mandatory": ["left_shift", "left_command"]
+            }
+          },
+          "to": [
+            {
+              "select_input_source": {
+                "input_source_id": "^org\\.unknown\\.keylayout\\.English–Graphite$"
+              }
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}

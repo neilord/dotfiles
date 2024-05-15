@@ -1,0 +1,262 @@
+{
+  "title": "Held F8 + Number Key → Control Clockify Timer",
+  "rules": [
+    {
+      "description": "Held F8 + Number Key → Control Clockify Timer",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f8"
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "play_or_pause_modifier",
+                "value": 1
+              }
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "play_or_pause"
+            }
+          ],
+          "to_after_key_up": [
+            {
+              "set_variable": {
+                "name": "play_or_pause_modifier",
+                "value": 0
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "play_or_pause_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "1"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Clockify/toggle_last_work.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "play_or_pause_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "1",
+            "modifiers": {
+              "mandatory": ["left_shift"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Clockify/discard_last_work.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "play_or_pause_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "2"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Clockify/toggle_last_programming.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "play_or_pause_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "2",
+            "modifiers": {
+              "mandatory": ["left_shift"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Clockify/discard_last_programming.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "play_or_pause_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "3"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Clockify/toggle_last_japanese.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "play_or_pause_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "3",
+            "modifiers": {
+              "mandatory": ["left_shift"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Clockify/discard_last_japanese.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "play_or_pause_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "5"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Clockify/toggle_reading_japanese.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "play_or_pause_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "6"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Clockify/toggle_listening_japanese.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "play_or_pause_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "7"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Clockify/toggle_semiactivelistening_japanese.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "play_or_pause_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "8"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Clockify/toggle_passivelistening_japanese.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "play_or_pause_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "hyphen"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/.config/mpv/pausePlay.sh ; /Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Clockify/toggle_semiactivelistening_japanese.sh"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "play_or_pause_modifier",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "equal_sign"
+          },
+          "to": [
+            {
+              "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/.config/mpv/pausePlay.sh ; /Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Clockify/toggle_passivelistening_japanese.sh"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

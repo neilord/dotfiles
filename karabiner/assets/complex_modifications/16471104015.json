@@ -1,0 +1,30 @@
+{
+  "title": "Held ⇥ → HYPER",
+  "rules": [
+    {
+      "description": "Held ⇥ → HYPER",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "tab",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_command",
+              "modifiers": ["left_option", "left_control", "left_shift"]
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "tab"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
