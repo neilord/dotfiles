@@ -1,0 +1,42 @@
+# load scripting addition
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# settings
+yabai -m config                      \
+    layout bsp                       \
+    auto_balance on                  \
+    window_placement second_child    \
+    window_shadow float              \
+    window_animation_duration 0.10   \
+    mouse_drop_action stack          \
+    insert_feedback_color 0x7090c4ff \
+
+# Not managed apps
+yabai -m rule --add app="^(TextSniper|aText|Archiver|Digital Color Meter|mySIMBL|MacForce|CleanMyMac X|mpv|Karabiner-EventViewer|Karabiner-Elements|LuLu|Vimac|Calculator|Software Update|Dictionary|VLC|System Settings|System Preferences|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice|App Store|Steam|Alfred|Activity Monitor)$" manage=off
+yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
+
+# Custom apps settings
+yabai -m rule --add app="^mpv$" border=off
+yabai -m rule --add app="^Finder$" manage=off opacity=0.8
+
+yabai -m signal --add event=window_created app="^(Arc|mpv)$" \
+    action='
+    for delay in 1 3 5 10 60; do
+        sleep $delay;
+        WINDOW_ID="${YABAI_WINDOW_ID}";
+        HAS_SHADOW=$(yabai -m query --windows \
+                     | jq ".[] | select(.id == $WINDOW_ID and .[\"has-shadow\"] == true).id");
+        if [ ! -z "$HAS_SHADOW" ]; then
+            yabai -m window "${YABAI_WINDOW_ID}" --toggle shadow;
+            break;
+        fi;
+    done'
+
+yabai -m query --windows \
+    | jq '.[] | select(.["has-shadow"] == true and (.app == "Arc" or .app == "mpv")).id' \
+    | xargs -I{} yabai -m window {} --toggle shadow
+
+echo "yabai configuration loaded.."
