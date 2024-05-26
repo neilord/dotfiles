@@ -1,0 +1,16 @@
+# github auth keys
+gh/
+gh-copilot/
+github-copilot/
+
+# apps automatically creating configs but not intended to be edited
+iterm2/
+raycast/
+qBittorrent/
+
+# utils automatically creating default config
+nnn/
+thefuck/
+
+# files created automatically
+karabiner/automatic_backups/
