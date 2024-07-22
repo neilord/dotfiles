@@ -1,7 +1,7 @@
 return {
-   -- 'stevearc/dressing.nvim',
-   --
-   -- event = 'VeryLazy',
-   --
-   -- config = true,
+	"stevearc/dressing.nvim",
+
+	event = "VeryLazy",
+
+	config = true,
 }

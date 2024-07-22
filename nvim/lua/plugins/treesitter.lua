@@ -1,15 +1,13 @@
 return {
-   'nvim-treesitter/nvim-treesitter',
-   build = ':TSUpdate',
+	"nvim-treesitter/nvim-treesitter",
+	build = ":TSUpdate",
 
-   event = 'VeryLazy',
+	event = { "BufReadPre", "BufNewFile" },
 
-   opts = {
-      sync_install = false,
-      ensure_installed = 'all',
-      highlight = { enable = true },
-      indent = { enable = true },
-   },
-
-   config = true,
+	opts = {
+		auto_install = true,
+		highlight = { enable = true },
+		indent = { enable = true },
+		matchup = { enable = true },
+	},
 }

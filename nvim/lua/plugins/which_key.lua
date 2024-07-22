@@ -6,11 +6,11 @@ return {
    config = function()
       vim.opt.timeoutlen = 1000
 
-      local which_key = require('which-key')
+      local which_key = require("which-key")
 
       which_key.setup({
          window = {
-            border = 'rounded',
+            border = "rounded",
          },
          layout = {
             align = "center",
@@ -24,9 +24,10 @@ return {
       })
 
       which_key.register({
-         f = { name = "Find" },
          b = { name = "Buffer" },
          r = { name = "Restart" },
+         a = { name = "Animation" },
+         s = { name = "Settings" },
       }, { prefix = "<leader>" })
    end,
 }

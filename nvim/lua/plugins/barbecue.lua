@@ -6,7 +6,7 @@ return {
       "nvim-tree/nvim-web-devicons",
    },
 
-   event = 'BufReadPre',
+   event = "BufReadPre",
 
    config = true,
 }
