@@ -6,13 +6,19 @@ return {
 
 	opts = {
 		options = {
-			ignore_focus = { "NvimTree", "undotree", "diff", "lazy", "mason", "TelescopePrompt" },
+			ignore_focus = { "neo-tree", "NvimTree", "undotree", "diff", "lazy", "mason", "TelescopePrompt" },
 			disabled_filetypes = { "alpha" },
 			always_divide_middle = false,
 			refresh = { statusline = 100 },
 			globalstatus = true,
 		},
 		sections = {
+			lualine_a = { "mode" },
+			lualine_b = {
+				"branch",
+				"diff",
+				{ "diagnostics", symbols = { hint = "󰌵 ", info = "󰋼 ", warn = " ", error = "󰅙 " } },
+			},
 			lualine_c = {
 				{
 					"filename",
