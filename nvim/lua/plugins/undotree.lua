@@ -1,7 +1,7 @@
 return {
-   'mbbill/undotree',
+   "mbbill/undotree",
 
-   event = 'VeryLazy',
+   event = "VeryLazy",
 
    config = function()
       vim.g.undotree_HelpLine = 0
@@ -9,10 +9,10 @@ return {
 
    keys = {
       {
-         '<leader>u',
-         '<cmd>NvimTreeClose<CR><cmd>UndotreeToggle<CR><cmd>UndotreeFocus<CR>',
-         desc = 'Undo History',
-         silent = true
+         "<leader>u",
+         "<cmd>Neotree close<CR><cmd>UndotreeToggle<CR><cmd>UndotreeFocus<CR>",
+         desc = "Undo History",
+         silent = true,
       },
    },
 }

@@ -1,17 +1,17 @@
 return {
-    'RRethy/vim-illuminate',
+    "RRethy/vim-illuminate",
 
-    event = 'BufReadPre',
+    event = "BufReadPre",
 
     config = function()
-        require('illuminate').configure({
+        require("illuminate").configure({
             delay = 300,
             filetypes_denylist = {
-                'dirbuf',
-                'dirvish',
-                'fugitive',
-                'NvimTree',
-                'undotree',
+                "dirbuf",
+                "dirvish",
+                "fugitive",
+                "neo-tree",
+                "undotree",
             },
         })
     end,

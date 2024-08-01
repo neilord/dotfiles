@@ -28,7 +28,7 @@ return {
 
                 offsets = {
                     {
-                        filetype = "NvimTree",
+                        filetype = "neo-tree",
                         text = "󰉋 Explorer",
                         highlight = "BufferLineBufferSelected",
                         separator = true,
