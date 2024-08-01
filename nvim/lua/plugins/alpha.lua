@@ -28,12 +28,12 @@ return {
 		vim.api.nvim_set_hl(0, "AlphaHeader", { fg = "#709ad2" })
 
 		dashboard.section.buttons.val = {
-			dashboard.button("n", "  New File", ":new<BAR>startinsert<CR>"),
+			dashboard.button("n", "  New File", ":enew<CR>"),
 			dashboard.button("f", "  Find File", ':lua=require("telescope.builtin").find_files()<CR>'),
 			dashboard.button("t", "󰊄  Find Text", ':lua=require("telescope.builtin").live_grep()<CR>'),
 			dashboard.button("r", "  Recent Files", ':lua=require("telescope.builtin").oldfiles()<CR>'),
 			dashboard.button("p", "  Plugins", ":Lazy<CR>"),
-			dashboard.button("s", "  Settings", ":e $MYVIMRC | :cd %:p:h | vsplit .<CR>"),
+			dashboard.button("s", "  Settings", ":e $MYVIMRC | Neotree show <CR>"),
 			dashboard.button("q", "  Quit", ":qa<CR>"),
 		}
 
