@@ -3,26 +3,12 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvimtools/none-ls-extras.nvim",
-
-		"davidmh/cspell.nvim",
 	},
 	event = { "BufReadPre", "BufNewFile" },
 
 	config = function()
 		local null_ls = require("null-ls")
 		local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-		local cspell = require("cspell")
-		local cspell_config = {
-			diagnostics_postprocess = function(diagnostic)
-				diagnostic.severity = vim.diagnostic.severity["HINT"] -- ERROR, WARN, INFO, HINT
-			end,
-			config = {
-				find_json = function()
-					return vim.fn.expand("~/.config/nvim/cspell.json")
-				end,
-			},
-		}
 
 		null_ls.setup({
 			border = "rounded",
@@ -38,10 +24,8 @@ return {
 					})
 				end
 			end,
-			sources = {
-				cspell.diagnostics.with(cspell_config),
-				cspell.code_actions.with(cspell_config),
 
+			sources = {
 				null_ls.builtins.formatting.prettierd,
 				null_ls.builtins.formatting.stylua,
 				require("none-ls.diagnostics.eslint_d"),

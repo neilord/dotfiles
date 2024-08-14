@@ -19,7 +19,7 @@ return {
 		},
 
 		-- specific language servers
-		{ "folke/neodev.nvim",                 config = true },
+		{ "folke/neodev.nvim", config = true },
 		{
 			"pmizio/typescript-tools.nvim",
 			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
@@ -124,6 +124,13 @@ return {
 						end,
 					},
 				}
+			end,
+			["typos_lsp"] = function()
+				require("lspconfig").typos_lsp.setup({
+					init_options = {
+						diagnosticSeverity = "Info",
+					},
+				})
 			end,
 		})
 
