@@ -16,14 +16,14 @@ return {
 
 			textsubjects = {
 				enable = true,
-				prev_selection = ",",
+				prev_selection = ";",
 
 				keymaps = {
-					["."] = "textsubjects-smart",
-					[";"] = "textsubjects-container-outer",
-					["i;"] = {
+					["v"] = "textsubjects-smart",
+					["."] = "textsubjects-container-outer",
+					["i."] = {
 						"textsubjects-container-inner",
-						desc = "Select inside containers (classes, functions, etc.)",
+						desc = "select inside containers (classes, functions, etc.)",
 					},
 				},
 			},
