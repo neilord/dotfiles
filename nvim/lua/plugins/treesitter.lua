@@ -1,6 +1,9 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	dependencies = { "RRethy/nvim-treesitter-textsubjects" },
+	dependencies = {
+		"RRethy/nvim-treesitter-textsubjects",
+		"nvim-treesitter/nvim-treesitter-textobjects",
+	},
 	build = ":TSUpdate",
 	event = { "BufReadPre", "BufNewFile" },
 
