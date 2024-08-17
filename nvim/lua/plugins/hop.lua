@@ -7,6 +7,6 @@ return {
    config = true,
 
    keys = {
-      { "S", "<CMD>HopWord<CR>" },
+      { "S", "<CMD>HopWord<CR>", desc = "Just to Word" },
    },
 }
