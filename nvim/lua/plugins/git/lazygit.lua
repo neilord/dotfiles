@@ -8,7 +8,6 @@ return {
 
 	keys = {
 		{ "<leader>g", "<CMD>LazyGit<CR>" },
-		{ "<leader>G", "<CMD>LazyGitFilter<CR>" },
 	},
 
 	config = function()
