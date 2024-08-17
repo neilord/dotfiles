@@ -22,9 +22,11 @@ return {
 			window = {
 				documentation = {
 					border = "rounded",
+					winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:TelescopeSelection,Search:None",
 				},
 				completion = {
 					border = "rounded",
+					winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:TelescopeSelection,Search:None",
 				},
 			},
 			completion = {
