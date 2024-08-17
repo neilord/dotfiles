@@ -8,7 +8,6 @@ return {
 		styles = {
 			sidebars = "transparent",
 			floats = "transparent",
-			keywords = { italic = false },
 		},
 
 		on_colors = function(colors)
