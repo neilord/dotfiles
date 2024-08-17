@@ -9,5 +9,9 @@ gui:
       - "#709ad2"
       - bold
     selectedLineBgColor:
-      - "#394b70"
+      - "#283457"
   nerdFontsVersion: "3"
+git:
+  paging:
+    colorArg: never
+    pager: delta --dark --paging=never
