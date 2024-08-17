@@ -1,2 +1,13 @@
 gui:
   border: rounded
+  showBottomLine: false
+  theme:
+    activeBorderColor:
+      - "#73daca"
+      - bold
+    inactiveBorderColor:
+      - "#709ad2"
+      - bold
+    selectedLineBgColor:
+      - "#394b70"
+  nerdFontsVersion: "3"
