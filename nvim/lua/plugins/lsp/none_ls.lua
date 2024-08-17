@@ -34,6 +34,6 @@ return {
 			},
 		})
 
-		vim.keymap.set({ "n", "v" }, "<leader>gf", vim.lsp.buf.format)
+		vim.keymap.set({ "n", "v" }, "<leader>Bf", vim.lsp.buf.format)
 	end,
 }
