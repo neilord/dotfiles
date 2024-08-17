@@ -1,14 +1,26 @@
+[include]
+	path = ~/.local/share/nvim/lazy/tokyonight.nvim/extras/delta/tokyonight_night.gitconfig
 [user]
 	name = neilord
 	email = arshostak@gmail.com
 [core]
-	excludesfile = /Users/andrewshostak/.config/git/ignore
+	excludesfile = ~/.config/git/ignore
 	editor = nvim
+	pager = delta
+[delta]
+	syntax-theme = tokyonight_night
+	features = tokyonight_night
+[interactive]
+	diffFilter = delta --color-only
+[merge]
+	conflictstyle = diff3
+[diff]
+	colorMoved = default
 [pull]
 	ff = true
-[alias]
-lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
-lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
-lg = lg1
 [init]
 	defaultBranch = main
+[alias]
+	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
+	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+	lg = lg1
