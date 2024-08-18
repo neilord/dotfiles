@@ -28,7 +28,7 @@ return {
 		vim.api.nvim_set_hl(0, "AlphaHeader", { fg = "#709ad2" })
 
 		dashboard.section.buttons.val = {
-			dashboard.button("n", "  New File", "<cmd>enew<cr>"),
+			dashboard.button("n", "  New File", "<cmd>enew<cr>i"),
 			dashboard.button("f", "  Find File", '<cmd>lua=require("telescope.builtin").find_files()<cr>'),
 			dashboard.button("t", "󰊄  Find Text", '<cmd>lua=require("telescope.builtin").live_grep()<cr>'),
 			dashboard.button("r", "  Recent Files", '<cmd>lua=require("telescope.builtin").oldfiles()<cr>'),
