@@ -28,17 +28,17 @@ return {
 		vim.api.nvim_set_hl(0, "AlphaHeader", { fg = "#709ad2" })
 
 		dashboard.section.buttons.val = {
-			dashboard.button("n", "  New File", ":enew<CR>"),
-			dashboard.button("f", "  Find File", ':lua=require("telescope.builtin").find_files()<CR>'),
-			dashboard.button("t", "󰊄  Find Text", ':lua=require("telescope.builtin").live_grep()<CR>'),
-			dashboard.button("r", "  Recent Files", ':lua=require("telescope.builtin").oldfiles()<CR>'),
-			dashboard.button("p", "  Plugins", ":Lazy<CR>"),
-			dashboard.button("s", "  Settings", ":e $MYVIMRC | Neotree show <CR>"),
-			dashboard.button("q", "  Quit", ":qa<CR>"),
+			dashboard.button("n", "  New File", "<cmd>enew<cr>"),
+			dashboard.button("f", "  Find File", '<cmd>lua=require("telescope.builtin").find_files()<cr>'),
+			dashboard.button("t", "󰊄  Find Text", '<cmd>lua=require("telescope.builtin").live_grep()<cr>'),
+			dashboard.button("r", "  Recent Files", '<cmd>lua=require("telescope.builtin").oldfiles()<cr>'),
+			dashboard.button("p", "  Plugins", "<cmd>Lazy<cr>"),
+			dashboard.button("s", "  Settings", "<cmd>e $MYVIMRC | Neotree<cr>"),
+			dashboard.button("q", "  Quit", "<cmd>qa<cr>"),
 		}
 
 		require("alpha").setup(dashboard.config)
 
-		vim.keymap.set("n", "<leader>d", ":Alpha<CR>", { silent = true, desc = "Dashboard" })
+		vim.keymap.set("n", "<leader>d", "<cmd>Alpha<cr>", { silent = true, desc = "Dashboard" })
 	end,
 }
