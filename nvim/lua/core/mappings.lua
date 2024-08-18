@@ -10,9 +10,9 @@ vim.keymap.set("n", "-", "<C-x>")
 vim.keymap.set("v", "<S-Down>", ":m '>+1<CR>gv=gv", { silent = true })
 vim.keymap.set("v", "<S-Up>", ":m '<-2<CR>gv=gv", { silent = true })
 
-vim.keymap.set("n", "<leader>q", ":qa<CR>", { desc = "Quit", silent = true })
-vim.keymap.set("n", "<leader>Q", ":qa!<CR>", { desc = "Force Quit", silent = true })
-vim.keymap.set("n", "<leader>sc", ":e $MYVIMRC | :cd %:p:h | vsplit .<CR>", { desc = "Config", silent = true })
+vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>", { desc = "Quit", silent = true })
+vim.keymap.set("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "Force Quit", silent = true })
+vim.keymap.set("n", "<leader>sc", "<cmd>e $MYVIMRC | Neotree<cr>", { desc = "Config", silent = true })
 
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
