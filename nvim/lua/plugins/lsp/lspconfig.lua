@@ -19,7 +19,7 @@ return {
 		},
 
 		-- specific language servers
-		{ "folke/neodev.nvim", config = true },
+		{ "folke/neodev.nvim",                 config = true },
 		{
 			"pmizio/typescript-tools.nvim",
 			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
@@ -42,13 +42,13 @@ return {
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 			callback = function(ev)
-				local opts = { buffer = ev.buf, silent = true }
+				local opts = { buffer = ev.buf, silent = true, nowait = true }
 
-				vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
+				vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
 				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-				vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
-				vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
-				vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+				vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
+				vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
+				vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<cr>", opts)
 
 				opts.desc = "See available code actions"
 				vim.keymap.set({ "n", "v" }, "<leader>ca", require("actions-preview").code_actions, opts)
@@ -57,7 +57,7 @@ return {
 				vim.keymap.set("n", "<leader>rn", ":IncRename ", opts)
 
 				opts.desc = "Show buffer diagnostics"
-				vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+				vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<cr>", opts)
 
 				opts.desc = "Show line diagnostics"
 				vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
@@ -67,7 +67,7 @@ return {
 				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
 				opts.desc = "LSP"
-				vim.keymap.set("n", "<leader>rl", ":LspRestart<CR>", opts)
+				vim.keymap.set("n", "<leader>rl", ":LspRestart<cr>", opts)
 			end,
 		})
 
