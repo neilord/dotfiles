@@ -24,6 +24,8 @@ return {
 					and vim.bo.filetype ~= "help"
 					and vim.bo.filetype ~= "alpha"
 					and vim.bo.filetype ~= "neo-tree"
+					and vim.bo.filetype ~= "notify"
+					and vim.bo.filetype ~= "trouble"
 				then
 					disabled = false
 				end
