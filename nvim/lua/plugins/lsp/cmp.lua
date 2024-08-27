@@ -7,7 +7,7 @@ return {
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
 		"rafamadriz/friendly-snippets",
-		"onsails/lspkind.nvim",
+		{ "onsails/lspkind.nvim", dependencies = { "brenoprata10/nvim-highlight-colors" } },
 	},
 	event = "InsertEnter",
 
@@ -51,15 +51,17 @@ return {
 			formatting = {
 				fields = { "kind", "abbr", "menu" },
 				expandable_indicator = true,
-				format = lspkind.cmp_format({
-					mode = "symbol",
-					-- menu = {
-					-- 	nvim_lsp = "[LSP]",
-					-- 	luasnip = "[LuaSnip]",
-					-- 	buffer = "[Buffer]",
-					-- 	path = "[Path]",
-					-- },
-				}),
+				format = function(entry, item)
+					local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })
+					item = require("lspkind").cmp_format({
+						mode = "symbol",
+					})(entry, item)
+					if color_item.abbr_hl_group then
+						item.kind_hl_group = color_item.abbr_hl_group
+						item.kind = color_item.abbr
+					end
+					return item
+				end,
 			},
 		})
 

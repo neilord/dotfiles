@@ -1,17 +1,10 @@
 return {
-	"NvChad/nvim-colorizer.lua",
+	"brenoprata10/nvim-highlight-colors",
 
 	opts = {
-		filetypes = {
-			"*",
-			"!lazy",
-		},
-		user_default_options = {
-			RRGGBBAA = true,
-			AARRGGBB = true,
-			css = true,
-			tailwind = true,
-			names = false,
-		},
+		render = "virtual",
+		virtual_symbol = "󱓻",
+		enable_tailwind = true,
+		exclude_filetypes = { "lazy" },
 	},
 }
