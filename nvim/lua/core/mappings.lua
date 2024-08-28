@@ -7,6 +7,8 @@ vim.keymap.set("n", "Y", "y$")
 vim.keymap.set("n", "+", "<C-a>")
 vim.keymap.set("n", "-", "<C-x>")
 
+vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save", silent = true })
+vim.keymap.set("n", "<leader>W", "<cmd>noa w<cr>", { desc = "Save Without Modifications", silent = true })
 vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>", { desc = "Quit", silent = true })
 vim.keymap.set("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "Force Quit", silent = true })
 vim.keymap.set("n", "<leader>sc", "<cmd>e $MYVIMRC | Neotree<cr>", { desc = "Config", silent = true })
