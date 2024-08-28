@@ -7,9 +7,6 @@ vim.keymap.set("n", "Y", "y$")
 vim.keymap.set("n", "+", "<C-a>")
 vim.keymap.set("n", "-", "<C-x>")
 
-vim.keymap.set("v", "<S-Down>", ":m '>+1<CR>gv=gv", { silent = true })
-vim.keymap.set("v", "<S-Up>", ":m '<-2<CR>gv=gv", { silent = true })
-
 vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>", { desc = "Quit", silent = true })
 vim.keymap.set("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "Force Quit", silent = true })
 vim.keymap.set("n", "<leader>sc", "<cmd>e $MYVIMRC | Neotree<cr>", { desc = "Config", silent = true })
@@ -27,9 +24,9 @@ vim.keymap.set({ "n", "v" }, "<leader>D", '"+D')
 
 -- toggle search highlight
 vim.keymap.set("n", "<Leader>h", function()
-   if vim.v.hlsearch == 1 and vim.o.hlsearch then
-      vim.o.hlsearch = false
-   else
-      vim.opt.hlsearch = true
-   end
+    if vim.v.hlsearch == 1 and vim.o.hlsearch then
+        vim.o.hlsearch = false
+    else
+        vim.opt.hlsearch = true
+    end
 end, { desc = "Toggle Highlight" })
