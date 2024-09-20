@@ -26,9 +26,11 @@ vim.keymap.set({ "n", "v" }, "<leader>D", '"+D')
 
 -- toggle search highlight
 vim.keymap.set("n", "<Leader>h", function()
-    if vim.v.hlsearch == 1 and vim.o.hlsearch then
-        vim.o.hlsearch = false
-    else
-        vim.opt.hlsearch = true
-    end
+	if vim.v.hlsearch == 1 and vim.o.hlsearch then
+		vim.o.hlsearch = false
+	else
+		vim.opt.hlsearch = true
+	end
 end, { desc = "Toggle Highlight" })
+
+vim.keymap.set("n", "<leader>lw", "<cmd>set wrap!<cr>", { desc = "Toggle Line Wrap" })
