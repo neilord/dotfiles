@@ -1,22 +1,85 @@
 {
-    "global": {
-        "ask_for_confirmation_before_quitting": true,
-        "check_for_updates_on_startup": true,
-        "show_in_menu_bar": true,
-        "show_profile_name_in_menu_bar": false,
-        "unsafe_ui": false
-    },
     "profiles": [
         {
             "complex_modifications": {
                 "parameters": {
-                    "basic.simultaneous_threshold_milliseconds": 50,
                     "basic.to_delayed_action_delay_milliseconds": 0,
                     "basic.to_if_alone_timeout_milliseconds": 150,
-                    "basic.to_if_held_down_threshold_milliseconds": 250,
-                    "mouse_motion_to_scroll.speed": 100
+                    "basic.to_if_held_down_threshold_milliseconds": 250
                 },
                 "rules": [
+                    {
+                        "description": "Held ⎵ + ⇪ → jp/en (does not trigger when left_command is held)",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "input_sources": [{ "input_source_id": "org.sil.ukelele.keyboardlayout..keylayout.English–Graphite" }],
+                                        "type": "input_source_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {
+                                        "mandatory": ["left_shift"],
+                                        "optional": []
+                                    }
+                                },
+                                "to": [{ "select_input_source": { "language": "ja" } }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "input_sources": [{ "language": "ja" }],
+                                        "type": "input_source_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {
+                                        "mandatory": ["left_shift"],
+                                        "optional": []
+                                    }
+                                },
+                                "to": [{ "select_input_source": { "input_source_id": "org.sil.ukelele.keyboardlayout..keylayout.English–Graphite" } }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Held ⎵ ⌘ + ⇥ → ru/en",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "input_sources": [{ "input_source_id": "org.sil.ukelele.keyboardlayout..keylayout.English–Graphite" }],
+                                        "type": "input_source_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "mandatory": ["left_shift", "left_command"] }
+                                },
+                                "to": [{ "select_input_source": { "input_source_id": "com.apple.keylayout.RussianWin" } }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "input_sources": [{ "input_source_id": "com.apple.keylayout.RussianWin" }],
+                                        "type": "input_source_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "mandatory": ["left_shift", "left_command"] }
+                                },
+                                "to": [{ "select_input_source": { "input_source_id": "org.sil.ukelele.keyboardlayout..keylayout.English–Graphite" } }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
                     {
                         "description": "Alone ⇪ → esc & Held ⇪ → SUPER",
                         "manipulators": [
@@ -29,23 +92,14 @@
                                         "type": "frontmost_application_unless"
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "caps_lock"
-                                },
+                                "from": { "key_code": "caps_lock" },
                                 "to": [
                                     {
                                         "key_code": "left_command",
-                                        "modifiers": [
-                                            "left_option",
-                                            "left_control"
-                                        ]
+                                        "modifiers": ["left_option", "left_control"]
                                     }
                                 ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "escape"
-                                    }
-                                ],
+                                "to_if_alone": [{ "key_code": "escape" }],
                                 "type": "basic"
                             },
                             {
@@ -57,19 +111,9 @@
                                         "type": "frontmost_application_if"
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "caps_lock"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_control"
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "escape"
-                                    }
-                                ],
+                                "from": { "key_code": "caps_lock" },
+                                "to": [{ "key_code": "left_control" }],
+                                "to_if_alone": [{ "key_code": "escape" }],
                                 "type": "basic"
                             }
                         ]
@@ -80,47 +124,24 @@
                             {
                                 "from": {
                                     "key_code": "spacebar",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "left_shift"
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "spacebar"
-                                    }
-                                ],
+                                "to": [{ "key_code": "left_shift" }],
+                                "to_if_alone": [{ "key_code": "spacebar" }],
                                 "type": "basic"
                             }
                         ]
                     },
                     {
-                        "description": "Right Alone ⌘ → ⌫",
+                        "description": "Right Alone ⌘ → ↩︎",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "right_command",
-                                    "modifiers": {
-                                        "optional": [
-                                            "left_command",
-                                            "left_option",
-                                            "left_control",
-                                            "right_command",
-                                            "right_option",
-                                            "right_control"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["left_command", "left_option", "left_control", "right_command", "right_option", "right_control"] }
                                 },
                                 "to": [
-                                    {
-                                        "key_code": "right_command"
-                                    },
+                                    { "key_code": "right_command" },
                                     {
                                         "set_variable": {
                                             "name": "right_command_modifier",
@@ -136,11 +157,7 @@
                                         }
                                     }
                                 ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "delete_or_backspace"
-                                    }
-                                ],
+                                "to_if_alone": [{ "key_code": "delete_or_backspace" }],
                                 "type": "basic"
                             }
                         ]
@@ -152,50 +169,26 @@
                                 "from": {
                                     "key_code": "right_command",
                                     "modifiers": {
-                                        "mandatory": [
-                                            "left_shift"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
+                                        "mandatory": ["left_shift"],
+                                        "optional": ["any"]
                                     }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "right_command"
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "delete_forward"
-                                    }
-                                ],
+                                "to": [{ "key_code": "right_command" }],
+                                "to_if_alone": [{ "key_code": "delete_forward" }],
                                 "type": "basic"
                             }
                         ]
                     },
                     {
-                        "description": "Left Alone ⌘ → ↩︎",
+                        "description": "Left Alone ⌘ → ⌫",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "left_command",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "left_command"
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "return_or_enter"
-                                    }
-                                ],
+                                "to": [{ "key_code": "left_command" }],
+                                "to_if_alone": [{ "key_code": "return_or_enter" }],
                                 "type": "basic"
                             }
                         ]
@@ -213,17 +206,9 @@
                                 ],
                                 "from": {
                                     "key_code": "a",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "left_arrow"
-                                    }
-                                ],
+                                "to": [{ "key_code": "left_arrow" }],
                                 "type": "basic"
                             },
                             {
@@ -236,17 +221,9 @@
                                 ],
                                 "from": {
                                     "key_code": "s",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "up_arrow"
-                                    }
-                                ],
+                                "to": [{ "key_code": "up_arrow" }],
                                 "type": "basic"
                             },
                             {
@@ -259,17 +236,9 @@
                                 ],
                                 "from": {
                                     "key_code": "d",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "down_arrow"
-                                    }
-                                ],
+                                "to": [{ "key_code": "down_arrow" }],
                                 "type": "basic"
                             },
                             {
@@ -282,17 +251,9 @@
                                 ],
                                 "from": {
                                     "key_code": "f",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "right_arrow"
-                                    }
-                                ],
+                                "to": [{ "key_code": "right_arrow" }],
                                 "type": "basic"
                             }
                         ]
@@ -303,26 +264,15 @@
                             {
                                 "from": {
                                     "key_code": "non_us_backslash",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
                                 "to": [
                                     {
                                         "key_code": "left_option",
-                                        "modifiers": [
-                                            "left_control",
-                                            "left_shift"
-                                        ]
+                                        "modifiers": ["left_control", "left_shift"]
                                     }
                                 ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "non_us_backslash"
-                                    }
-                                ],
+                                "to_if_alone": [{ "key_code": "non_us_backslash" }],
                                 "type": "basic"
                             }
                         ]
@@ -331,12 +281,8 @@
                         "description": "Held ⇥ + Key → Yabai Shortcuts",
                         "manipulators": [
                             {
-                                "from": {
-                                    "key_code": "tab"
-                                },
-                                "parameters": {
-                                    "basic.to_if_held_down_threshold_milliseconds": 3000
-                                },
+                                "from": { "key_code": "tab" },
+                                "parameters": { "basic.to_if_held_down_threshold_milliseconds": 3000 },
                                 "to": [
                                     {
                                         "set_variable": {
@@ -352,20 +298,10 @@
                                             "value": 0
                                         }
                                     },
-                                    {
-                                        "shell_command": "/opt/homebrew/bin/sketchybar --bar hidden=on"
-                                    }
+                                    { "shell_command": "/opt/homebrew/bin/sketchybar --bar hidden=on" }
                                 ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "tab"
-                                    }
-                                ],
-                                "to_if_held_down": [
-                                    {
-                                        "shell_command": "/opt/homebrew/bin/sketchybar --bar hidden=off"
-                                    }
-                                ],
+                                "to_if_alone": [{ "key_code": "tab" }],
+                                "to_if_held_down": [{ "shell_command": "/opt/homebrew/bin/sketchybar --bar hidden=off" }],
                                 "type": "basic"
                             },
                             {
@@ -376,14 +312,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "j"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus prev"
-                                    }
-                                ],
+                                "from": { "key_code": "j" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus prev" }],
                                 "type": "basic"
                             },
                             {
@@ -394,14 +324,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "k"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus next"
-                                    }
-                                ],
+                                "from": { "key_code": "k" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus next" }],
                                 "type": "basic"
                             },
                             {
@@ -412,14 +336,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "l"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus recent"
-                                    }
-                                ],
+                                "from": { "key_code": "l" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus recent" }],
                                 "type": "basic"
                             },
                             {
@@ -430,14 +348,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "f"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle float"
-                                    }
-                                ],
+                                "from": { "key_code": "f" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle float" }],
                                 "type": "basic"
                             },
                             {
@@ -448,14 +360,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "t"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle topmost"
-                                    }
-                                ],
+                                "from": { "key_code": "t" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle topmost" }],
                                 "type": "basic"
                             },
                             {
@@ -466,14 +372,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "p"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle border --toggle sticky --toggle topmost --toggle pip"
-                                    }
-                                ],
+                                "from": { "key_code": "p" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle border --toggle sticky --toggle topmost --toggle pip" }],
                                 "type": "basic"
                             },
                             {
@@ -484,14 +384,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "e"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle border"
-                                    }
-                                ],
+                                "from": { "key_code": "e" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle border" }],
                                 "type": "basic"
                             },
                             {
@@ -502,14 +396,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "s"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle sticky"
-                                    }
-                                ],
+                                "from": { "key_code": "s" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle sticky" }],
                                 "type": "basic"
                             },
                             {
@@ -520,14 +408,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "n"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle native-fullscreen"
-                                    }
-                                ],
+                                "from": { "key_code": "n" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle native-fullscreen" }],
                                 "type": "basic"
                             },
                             {
@@ -538,14 +420,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "m"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle zoom-fullscreen"
-                                    }
-                                ],
+                                "from": { "key_code": "m" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle zoom-fullscreen" }],
                                 "type": "basic"
                             },
                             {
@@ -556,14 +432,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "comma"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle zoom-parent on"
-                                    }
-                                ],
+                                "from": { "key_code": "comma" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle zoom-parent on" }],
                                 "type": "basic"
                             },
                             {
@@ -574,14 +444,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "u"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/toggle_space_float.sh"
-                                    }
-                                ],
+                                "from": { "key_code": "u" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/toggle_space_float.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -592,14 +456,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "d"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle split"
-                                    }
-                                ],
+                                "from": { "key_code": "d" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle split" }],
                                 "type": "basic"
                             },
                             {
@@ -610,14 +468,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "x"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --mirror x-axis"
-                                    }
-                                ],
+                                "from": { "key_code": "x" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --mirror x-axis" }],
                                 "type": "basic"
                             },
                             {
@@ -628,14 +480,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "y"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --mirror y-axis"
-                                    }
-                                ],
+                                "from": { "key_code": "y" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --mirror y-axis" }],
                                 "type": "basic"
                             },
                             {
@@ -646,14 +492,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "r"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/rotate_tree.sh"
-                                    }
-                                ],
+                                "from": { "key_code": "r" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/rotate_tree.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -664,14 +504,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "q"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/select_next_window.sh"
-                                    }
-                                ],
+                                "from": { "key_code": "q" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/select_next_window.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -682,14 +516,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "a"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/select_prev_window.sh"
-                                    }
-                                ],
+                                "from": { "key_code": "a" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/select_prev_window.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -700,14 +528,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "h"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window west --resize right:-200:0 2> /dev/null || /usr/local/bin/yabai -m window --resize right:-200:0"
-                                    }
-                                ],
+                                "from": { "key_code": "h" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window west --resize right:-200:0 2> /dev/null || /usr/local/bin/yabai -m window --resize right:-200:0" }],
                                 "type": "basic"
                             },
                             {
@@ -718,14 +540,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "quote"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window west --resize right:200:0 2> /dev/null || /usr/local/bin/yabai -m window --resize right:200:0"
-                                    }
-                                ],
+                                "from": { "key_code": "quote" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window west --resize right:200:0 2> /dev/null || /usr/local/bin/yabai -m window --resize right:200:0" }],
                                 "type": "basic"
                             },
                             {
@@ -736,14 +552,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "i"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window north --resize bottom:0:-100 2> /dev/null || /usr/local/bin/yabai -m window --resize bottom:0:-100"
-                                    }
-                                ],
+                                "from": { "key_code": "i" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window north --resize bottom:0:-100 2> /dev/null || /usr/local/bin/yabai -m window --resize bottom:0:-100" }],
                                 "type": "basic"
                             },
                             {
@@ -754,14 +564,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "o"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window north --resize bottom:0:100 2> /dev/null || /usr/local/bin/yabai -m window --resize bottom:0:100"
-                                    }
-                                ],
+                                "from": { "key_code": "o" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window north --resize bottom:0:100 2> /dev/null || /usr/local/bin/yabai -m window --resize bottom:0:100" }],
                                 "type": "basic"
                             },
                             {
@@ -772,14 +576,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "b"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --balance"
-                                    }
-                                ],
+                                "from": { "key_code": "b" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --balance" }],
                                 "type": "basic"
                             },
                             {
@@ -790,14 +588,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "semicolon"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --swap mouse"
-                                    }
-                                ],
+                                "from": { "key_code": "semicolon" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --swap mouse" }],
                                 "type": "basic"
                             },
                             {
@@ -808,14 +600,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "1"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 1"
-                                    }
-                                ],
+                                "from": { "key_code": "1" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 1" }],
                                 "type": "basic"
                             },
                             {
@@ -826,14 +612,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "2"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 2"
-                                    }
-                                ],
+                                "from": { "key_code": "2" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 2" }],
                                 "type": "basic"
                             },
                             {
@@ -844,14 +624,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "3"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 3"
-                                    }
-                                ],
+                                "from": { "key_code": "3" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 3" }],
                                 "type": "basic"
                             },
                             {
@@ -862,14 +636,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "4"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 4"
-                                    }
-                                ],
+                                "from": { "key_code": "4" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 4" }],
                                 "type": "basic"
                             },
                             {
@@ -880,14 +648,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "5"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 5"
-                                    }
-                                ],
+                                "from": { "key_code": "5" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 5" }],
                                 "type": "basic"
                             },
                             {
@@ -898,14 +660,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "6"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 6"
-                                    }
-                                ],
+                                "from": { "key_code": "6" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 6" }],
                                 "type": "basic"
                             },
                             {
@@ -916,14 +672,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "7"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 7"
-                                    }
-                                ],
+                                "from": { "key_code": "7" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 7" }],
                                 "type": "basic"
                             },
                             {
@@ -934,14 +684,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "8"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 8"
-                                    }
-                                ],
+                                "from": { "key_code": "8" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 8" }],
                                 "type": "basic"
                             },
                             {
@@ -952,14 +696,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "9"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 9"
-                                    }
-                                ],
+                                "from": { "key_code": "9" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 9" }],
                                 "type": "basic"
                             },
                             {
@@ -970,14 +708,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "0"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 10"
-                                    }
-                                ],
+                                "from": { "key_code": "0" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 10" }],
                                 "type": "basic"
                             },
                             {
@@ -988,14 +720,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "g"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/send_window_to_created_space.sh"
-                                    }
-                                ],
+                                "from": { "key_code": "g" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/send_window_to_created_space.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -1006,14 +732,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "v"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/focus_sent_window_on_created_space.sh"
-                                    }
-                                ],
+                                "from": { "key_code": "v" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/focus_sent_window_on_created_space.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -1024,14 +744,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "c"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/focus_created_space.sh; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change"
-                                    }
-                                ],
+                                "from": { "key_code": "c" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/focus_created_space.sh; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change" }],
                                 "type": "basic"
                             },
                             {
@@ -1042,14 +756,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "z"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --create; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change"
-                                    }
-                                ],
+                                "from": { "key_code": "z" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --create; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change" }],
                                 "type": "basic"
                             },
                             {
@@ -1060,14 +768,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "w"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/destroy_space.sh; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change"
-                                    }
-                                ],
+                                "from": { "key_code": "w" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/destroy_space.sh; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change" }],
                                 "type": "basic"
                             },
                             {
@@ -1078,14 +780,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "hyphen"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --move prev; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change"
-                                    }
-                                ],
+                                "from": { "key_code": "hyphen" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --move prev; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change" }],
                                 "type": "basic"
                             },
                             {
@@ -1096,14 +792,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "equal_sign"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --move next; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change"
-                                    }
-                                ],
+                                "from": { "key_code": "equal_sign" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --move next; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change" }],
                                 "type": "basic"
                             },
                             {
@@ -1116,17 +806,9 @@
                                 ],
                                 "from": {
                                     "key_code": "period",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift"
-                                        ]
-                                    }
+                                    "modifiers": { "mandatory": ["left_shift"] }
                                 },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/increase_opacity_by_5.sh"
-                                    }
-                                ],
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/increase_opacity_by_5.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -1137,14 +819,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "period"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/decrease_opacity_by_5.sh"
-                                    }
-                                ],
+                                "from": { "key_code": "period" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/decrease_opacity_by_5.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -1155,14 +831,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "slash"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "current_opacity=$(/usr/local/bin/yabai -m query --windows --window | /opt/homebrew/bin/jq -re .opacity); [ \"$current_opacity\" = \"1\" ] && /usr/local/bin/yabai -m window --opacity 0.9 || /usr/local/bin/yabai -m window --opacity 1.0"
-                                    }
-                                ],
+                                "from": { "key_code": "slash" },
+                                "to": [{ "shell_command": "current_opacity=$(/usr/local/bin/yabai -m query --windows --window | /opt/homebrew/bin/jq -re .opacity); [ \"$current_opacity\" = \"1\" ] && /usr/local/bin/yabai -m window --opacity 0.9 || /usr/local/bin/yabai -m window --opacity 1.0" }],
                                 "type": "basic"
                             },
                             {
@@ -1173,14 +843,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "grave_accent_and_tilde"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/toggle_focus_follows_mouse.sh"
-                                    }
-                                ],
+                                "from": { "key_code": "grave_accent_and_tilde" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/toggle_focus_follows_mouse.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -1191,14 +855,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "escape"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai --restart-service"
-                                    }
-                                ],
+                                "from": { "key_code": "escape" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai --restart-service" }],
                                 "type": "basic"
                             }
                         ]
@@ -1209,443 +867,26 @@
                             {
                                 "from": {
                                     "key_code": "left_shift",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
                                 "to": [
                                     {
                                         "key_code": "left_command",
-                                        "modifiers": [
-                                            "left_control"
-                                        ]
+                                        "modifiers": ["left_control"]
                                     }
                                 ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "left_shift"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Held ⎵ + ⇪ → jp/en",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "input_sources": [
-                                            {
-                                                "input_source_id": "^org\\.unknown\\.keylayout\\.English–Graphite$"
-                                            }
-                                        ],
-                                        "type": "input_source_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "caps_lock",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "select_input_source": {
-                                            "language": "ja"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "input_sources": [
-                                            {
-                                                "language": "ja"
-                                            }
-                                        ],
-                                        "type": "input_source_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "caps_lock",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "select_input_source": {
-                                            "input_source_id": "^org\\.unknown\\.keylayout\\.English–Graphite$"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Held ⎵ ⌘ + ⇥ → ru/en",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "input_sources": [
-                                            {
-                                                "input_source_id": "^org\\.unknown\\.keylayout\\.English–Graphite$"
-                                            }
-                                        ],
-                                        "type": "input_source_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "caps_lock",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_command"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "select_input_source": {
-                                            "language": "ru"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "input_sources": [
-                                            {
-                                                "language": "ru"
-                                            }
-                                        ],
-                                        "type": "input_source_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "caps_lock",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift",
-                                            "left_command"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "select_input_source": {
-                                            "input_source_id": "^org\\.unknown\\.keylayout\\.English–Graphite$"
-                                        }
-                                    }
-                                ],
+                                "to_if_alone": [{ "key_code": "left_shift" }],
                                 "type": "basic"
                             }
                         ]
                     }
                 ]
             },
-            "devices": [
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 641,
-                        "vendor_id": 1452
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": false,
-                        "is_pointing_device": true,
-                        "product_id": 641,
-                        "vendor_id": 1452
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": false,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": true,
-                        "is_pointing_device": true,
-                        "product_id": 6505,
-                        "vendor_id": 12951
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": true,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 6505,
-                        "vendor_id": 12951
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": false,
-                        "is_pointing_device": true,
-                        "product_id": 6505,
-                        "vendor_id": 12951
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": false,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 598,
-                        "vendor_id": 1452
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                }
-            ],
-            "fn_function_keys": [
-                {
-                    "from": {
-                        "key_code": "f1"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "display_brightness_decrement"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f2"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "display_brightness_increment"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f3"
-                    },
-                    "to": [
-                        {
-                            "apple_vendor_keyboard_key_code": "mission_control"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f4"
-                    },
-                    "to": [
-                        {
-                            "apple_vendor_keyboard_key_code": "spotlight"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f5"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "dictation"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f6"
-                    },
-                    "to": [
-                        {
-                            "key_code": "f6"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f7"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "rewind"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f8"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "play_or_pause"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f9"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "fast_forward"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f10"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "mute"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f11"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "volume_decrement"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f12"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "volume_increment"
-                        }
-                    ]
-                }
-            ],
             "name": "Main (Laptop)",
-            "parameters": {
-                "delay_milliseconds_before_open_device": 1000
-            },
-            "selected": true,
-            "simple_modifications": [
-                {
-                    "from": {
-                        "apple_vendor_top_case_key_code": "keyboard_fn"
-                    },
-                    "to": [
-                        {
-                            "key_code": "right_shift"
-                        }
-                    ]
-                }
-            ],
-            "virtual_hid_keyboard": {
-                "country_code": 0,
-                "indicate_sticky_modifier_keys_state": true,
-                "mouse_key_xy_scale": 100
-            }
+            "selected": true
         },
         {
             "complex_modifications": {
-                "parameters": {
-                    "basic.simultaneous_threshold_milliseconds": 50,
-                    "basic.to_delayed_action_delay_milliseconds": 500,
-                    "basic.to_if_alone_timeout_milliseconds": 1000,
-                    "basic.to_if_held_down_threshold_milliseconds": 500,
-                    "mouse_motion_to_scroll.speed": 100
-                },
                 "rules": [
                     {
                         "description": "Graphite → Qwerty",
@@ -1653,1321 +894,352 @@
                             {
                                 "from": {
                                     "key_code": "b",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "q"
-                                    }
-                                ],
+                                "to": [{ "key_code": "q" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "l",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "w"
-                                    }
-                                ],
+                                "to": [{ "key_code": "w" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "d",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "e"
-                                    }
-                                ],
+                                "to": [{ "key_code": "e" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "w",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "r"
-                                    }
-                                ],
+                                "to": [{ "key_code": "r" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "z",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "t"
-                                    }
-                                ],
+                                "to": [{ "key_code": "t" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "j",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "y"
-                                    }
-                                ],
+                                "to": [{ "key_code": "y" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "f",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "u"
-                                    }
-                                ],
+                                "to": [{ "key_code": "u" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "o",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "i"
-                                    }
-                                ],
+                                "to": [{ "key_code": "i" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "u",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "o"
-                                    }
-                                ],
+                                "to": [{ "key_code": "o" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "comma",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "p"
-                                    }
-                                ],
+                                "to": [{ "key_code": "p" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "n",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "a"
-                                    }
-                                ],
+                                "to": [{ "key_code": "a" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "r",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "s"
-                                    }
-                                ],
+                                "to": [{ "key_code": "s" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "t",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "d"
-                                    }
-                                ],
+                                "to": [{ "key_code": "d" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "s",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "f"
-                                    }
-                                ],
+                                "to": [{ "key_code": "f" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "g",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "g"
-                                    }
-                                ],
+                                "to": [{ "key_code": "g" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "y",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "h"
-                                    }
-                                ],
+                                "to": [{ "key_code": "h" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "h",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "j"
-                                    }
-                                ],
+                                "to": [{ "key_code": "j" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "a",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "k"
-                                    }
-                                ],
+                                "to": [{ "key_code": "k" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "e",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "l"
-                                    }
-                                ],
+                                "to": [{ "key_code": "l" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "i",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "semicolon"
-                                    }
-                                ],
+                                "to": [{ "key_code": "semicolon" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "q",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "z"
-                                    }
-                                ],
+                                "to": [{ "key_code": "z" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "x",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "x"
-                                    }
-                                ],
+                                "to": [{ "key_code": "x" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "m",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "c"
-                                    }
-                                ],
+                                "to": [{ "key_code": "c" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "c",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "v"
-                                    }
-                                ],
+                                "to": [{ "key_code": "v" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "v",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "b"
-                                    }
-                                ],
+                                "to": [{ "key_code": "b" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "k",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "n"
-                                    }
-                                ],
+                                "to": [{ "key_code": "n" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "p",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "m"
-                                    }
-                                ],
+                                "to": [{ "key_code": "m" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "quote",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "comma"
-                                    }
-                                ],
+                                "to": [{ "key_code": "comma" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "semicolon",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "period"
-                                    }
-                                ],
+                                "to": [{ "key_code": "period" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "period",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "slash"
-                                    }
-                                ],
+                                "to": [{ "key_code": "slash" }],
                                 "type": "basic"
                             },
                             {
                                 "from": {
                                     "key_code": "slash",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [
-                                    {
-                                        "key_code": "quote"
-                                    }
-                                ],
+                                "to": [{ "key_code": "quote" }],
                                 "type": "basic"
                             }
                         ]
                     }
                 ]
             },
-            "devices": [
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 641,
-                        "vendor_id": 1452
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": false,
-                        "is_pointing_device": true,
-                        "product_id": 641,
-                        "vendor_id": 1452
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": false,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 6505,
-                        "vendor_id": 12951
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": false,
-                        "is_pointing_device": true,
-                        "product_id": 6505,
-                        "vendor_id": 12951
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": false,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                }
-            ],
-            "fn_function_keys": [
-                {
-                    "from": {
-                        "key_code": "f1"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "display_brightness_decrement"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f2"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "display_brightness_increment"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f3"
-                    },
-                    "to": [
-                        {
-                            "apple_vendor_keyboard_key_code": "mission_control"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f4"
-                    },
-                    "to": [
-                        {
-                            "apple_vendor_keyboard_key_code": "spotlight"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f5"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "dictation"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f6"
-                    },
-                    "to": [
-                        {
-                            "key_code": "f6"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f7"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "rewind"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f8"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "play_or_pause"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f9"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "fast_forward"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f10"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "mute"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f11"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "volume_decrement"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f12"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "volume_increment"
-                        }
-                    ]
-                }
-            ],
-            "name": "System Defaults",
-            "parameters": {
-                "delay_milliseconds_before_open_device": 1000
-            },
-            "selected": false,
-            "simple_modifications": [],
-            "virtual_hid_keyboard": {
-                "country_code": 0,
-                "indicate_sticky_modifier_keys_state": true,
-                "mouse_key_xy_scale": 100
-            }
+            "name": "System Defaults"
         },
         {
-            "complex_modifications": {
-                "parameters": {
-                    "basic.simultaneous_threshold_milliseconds": 50,
-                    "basic.to_delayed_action_delay_milliseconds": 500,
-                    "basic.to_if_alone_timeout_milliseconds": 1000,
-                    "basic.to_if_held_down_threshold_milliseconds": 500,
-                    "mouse_motion_to_scroll.speed": 100
-                },
-                "rules": []
-            },
-            "devices": [
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 641,
-                        "vendor_id": 1452
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": false,
-                        "is_pointing_device": true,
-                        "product_id": 641,
-                        "vendor_id": 1452
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": false,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                }
-            ],
-            "fn_function_keys": [
-                {
-                    "from": {
-                        "key_code": "f1"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "display_brightness_decrement"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f2"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "display_brightness_increment"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f3"
-                    },
-                    "to": [
-                        {
-                            "apple_vendor_keyboard_key_code": "mission_control"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f4"
-                    },
-                    "to": [
-                        {
-                            "apple_vendor_keyboard_key_code": "spotlight"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f5"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "dictation"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f6"
-                    },
-                    "to": [
-                        {
-                            "key_code": "f6"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f7"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "rewind"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f8"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "play_or_pause"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f9"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "fast_forward"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f10"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "mute"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f11"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "volume_decrement"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f12"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "volume_increment"
-                        }
-                    ]
-                }
-            ],
             "name": "Anki",
-            "parameters": {
-                "delay_milliseconds_before_open_device": 1000
-            },
-            "selected": false,
             "simple_modifications": [
                 {
-                    "from": {
-                        "key_code": "0"
-                    },
-                    "to": [
-                        {
-                            "key_code": "2"
-                        }
-                    ]
+                    "from": { "key_code": "0" },
+                    "to": [{ "key_code": "2" }]
                 },
                 {
-                    "from": {
-                        "key_code": "9"
-                    },
-                    "to": [
-                        {
-                            "key_code": "1"
-                        }
-                    ]
+                    "from": { "key_code": "9" },
+                    "to": [{ "key_code": "1" }]
                 },
                 {
-                    "from": {
-                        "key_code": "c"
-                    },
-                    "to": [
-                        {
-                            "key_code": "return_or_enter"
-                        }
-                    ]
+                    "from": { "key_code": "c" },
+                    "to": [{ "key_code": "return_or_enter" }]
                 },
                 {
-                    "from": {
-                        "key_code": "comma"
-                    },
-                    "to": [
-                        {
-                            "key_code": "return_or_enter"
-                        }
-                    ]
+                    "from": { "key_code": "comma" },
+                    "to": [{ "key_code": "return_or_enter" }]
                 },
                 {
-                    "from": {
-                        "key_code": "d"
-                    },
-                    "to": [
-                        {
-                            "key_code": "return_or_enter"
-                        }
-                    ]
+                    "from": { "key_code": "d" },
+                    "to": [{ "key_code": "return_or_enter" }]
                 },
                 {
-                    "from": {
-                        "key_code": "equal_sign"
-                    },
-                    "to": [
-                        {
-                            "key_code": "4"
-                        }
-                    ]
+                    "from": { "key_code": "equal_sign" },
+                    "to": [{ "key_code": "4" }]
                 },
                 {
-                    "from": {
-                        "key_code": "escape"
-                    },
-                    "to": [
-                        {
-                            "pointing_button": "button1"
-                        }
-                    ]
+                    "from": { "key_code": "escape" },
+                    "to": [{ "pointing_button": "button1" }]
                 },
                 {
-                    "from": {
-                        "key_code": "f"
-                    },
-                    "to": [
-                        {
-                            "key_code": "return_or_enter"
-                        }
-                    ]
+                    "from": { "key_code": "f" },
+                    "to": [{ "key_code": "return_or_enter" }]
                 },
                 {
-                    "from": {
-                        "key_code": "hyphen"
-                    },
-                    "to": [
-                        {
-                            "key_code": "3"
-                        }
-                    ]
+                    "from": { "key_code": "hyphen" },
+                    "to": [{ "key_code": "3" }]
                 },
                 {
-                    "from": {
-                        "key_code": "k"
-                    },
-                    "to": [
-                        {
-                            "key_code": "return_or_enter"
-                        }
-                    ]
+                    "from": { "key_code": "k" },
+                    "to": [{ "key_code": "return_or_enter" }]
                 },
                 {
-                    "from": {
-                        "key_code": "m"
-                    },
-                    "to": [
-                        {
-                            "key_code": "return_or_enter"
-                        }
-                    ]
+                    "from": { "key_code": "m" },
+                    "to": [{ "key_code": "return_or_enter" }]
                 },
                 {
-                    "from": {
-                        "key_code": "n"
-                    },
-                    "to": [
-                        {
-                            "pointing_button": "button1"
-                        }
-                    ]
+                    "from": { "key_code": "n" },
+                    "to": [{ "pointing_button": "button1" }]
                 },
                 {
-                    "from": {
-                        "key_code": "non_us_backslash"
-                    },
-                    "to": [
-                        {
-                            "key_code": "return_or_enter"
-                        }
-                    ]
+                    "from": { "key_code": "non_us_backslash" },
+                    "to": [{ "key_code": "return_or_enter" }]
                 },
                 {
-                    "from": {
-                        "key_code": "v"
-                    },
-                    "to": [
-                        {
-                            "pointing_button": "button1"
-                        }
-                    ]
+                    "from": { "key_code": "v" },
+                    "to": [{ "pointing_button": "button1" }]
                 }
-            ],
-            "virtual_hid_keyboard": {
-                "country_code": 0,
-                "indicate_sticky_modifier_keys_state": true,
-                "mouse_key_xy_scale": 100
-            }
+            ]
         },
         {
-            "complex_modifications": {
-                "parameters": {
-                    "basic.simultaneous_threshold_milliseconds": 50,
-                    "basic.to_delayed_action_delay_milliseconds": 500,
-                    "basic.to_if_alone_timeout_milliseconds": 1000,
-                    "basic.to_if_held_down_threshold_milliseconds": 500,
-                    "mouse_motion_to_scroll.speed": 100
-                },
-                "rules": []
-            },
-            "devices": [
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 641,
-                        "vendor_id": 1452
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": false,
-                        "is_pointing_device": true,
-                        "product_id": 641,
-                        "vendor_id": 1452
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": false,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                }
-            ],
-            "fn_function_keys": [
-                {
-                    "from": {
-                        "key_code": "f1"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "display_brightness_decrement"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f2"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "display_brightness_increment"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f3"
-                    },
-                    "to": [
-                        {
-                            "apple_vendor_keyboard_key_code": "mission_control"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f4"
-                    },
-                    "to": [
-                        {
-                            "apple_vendor_keyboard_key_code": "spotlight"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f5"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "dictation"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f6"
-                    },
-                    "to": [
-                        {
-                            "key_code": "f6"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f7"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "rewind"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f8"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "play_or_pause"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f9"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "fast_forward"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f10"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "mute"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f11"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "volume_decrement"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f12"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "volume_increment"
-                        }
-                    ]
-                }
-            ],
             "name": "No Mouse",
-            "parameters": {
-                "delay_milliseconds_before_open_device": 1000
-            },
-            "selected": false,
             "simple_modifications": [
                 {
-                    "from": {
-                        "key_code": "j"
-                    },
-                    "to": [
-                        {
-                            "pointing_button": "button1"
-                        }
-                    ]
+                    "from": { "key_code": "j" },
+                    "to": [{ "pointing_button": "button1" }]
                 },
                 {
-                    "from": {
-                        "key_code": "k"
-                    },
-                    "to": [
-                        {
-                            "key_code": "e"
-                        }
-                    ]
+                    "from": { "key_code": "k" },
+                    "to": [{ "key_code": "e" }]
                 },
                 {
-                    "from": {
-                        "key_code": "l"
-                    },
-                    "to": [
-                        {
-                            "pointing_button": "button2"
-                        }
-                    ]
+                    "from": { "key_code": "l" },
+                    "to": [{ "pointing_button": "button2" }]
                 },
                 {
-                    "from": {
-                        "key_code": "quote"
-                    },
-                    "to": [
-                        {
-                            "key_code": "left_control"
-                        }
-                    ]
+                    "from": { "key_code": "quote" },
+                    "to": [{ "key_code": "left_control" }]
                 },
                 {
-                    "from": {
-                        "key_code": "semicolon"
-                    },
-                    "to": [
-                        {
-                            "key_code": "escape"
-                        }
-                    ]
+                    "from": { "key_code": "semicolon" },
+                    "to": [{ "key_code": "escape" }]
                 }
-            ],
-            "virtual_hid_keyboard": {
-                "country_code": 0,
-                "indicate_sticky_modifier_keys_state": true,
-                "mouse_key_xy_scale": 100
-            }
+            ]
         },
         {
             "complex_modifications": {
-                "parameters": {
-                    "basic.simultaneous_threshold_milliseconds": 50,
-                    "basic.to_delayed_action_delay_milliseconds": 500,
-                    "basic.to_if_alone_timeout_milliseconds": 1000,
-                    "basic.to_if_held_down_threshold_milliseconds": 500,
-                    "mouse_motion_to_scroll.speed": 100
-                },
                 "rules": [
                     {
                         "description": "Held ⇥ + Key → Yabai Shortcuts",
                         "manipulators": [
                             {
-                                "from": {
-                                    "key_code": "tab"
-                                },
-                                "parameters": {
-                                    "basic.to_if_held_down_threshold_milliseconds": 3000
-                                },
+                                "from": { "key_code": "tab" },
+                                "parameters": { "basic.to_if_held_down_threshold_milliseconds": 3000 },
                                 "to": [
                                     {
                                         "set_variable": {
@@ -2983,20 +1255,10 @@
                                             "value": 0
                                         }
                                     },
-                                    {
-                                        "shell_command": "/opt/homebrew/bin/sketchybar --bar hidden=on"
-                                    }
+                                    { "shell_command": "/opt/homebrew/bin/sketchybar --bar hidden=on" }
                                 ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "tab"
-                                    }
-                                ],
-                                "to_if_held_down": [
-                                    {
-                                        "shell_command": "/opt/homebrew/bin/sketchybar --bar hidden=off"
-                                    }
-                                ],
+                                "to_if_alone": [{ "key_code": "tab" }],
+                                "to_if_held_down": [{ "shell_command": "/opt/homebrew/bin/sketchybar --bar hidden=off" }],
                                 "type": "basic"
                             },
                             {
@@ -3007,14 +1269,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "j"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus prev"
-                                    }
-                                ],
+                                "from": { "key_code": "j" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus prev" }],
                                 "type": "basic"
                             },
                             {
@@ -3025,14 +1281,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "k"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus next"
-                                    }
-                                ],
+                                "from": { "key_code": "k" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus next" }],
                                 "type": "basic"
                             },
                             {
@@ -3043,14 +1293,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "l"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus recent"
-                                    }
-                                ],
+                                "from": { "key_code": "l" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus recent" }],
                                 "type": "basic"
                             },
                             {
@@ -3061,14 +1305,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "f"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle float"
-                                    }
-                                ],
+                                "from": { "key_code": "f" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle float" }],
                                 "type": "basic"
                             },
                             {
@@ -3079,14 +1317,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "t"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle topmost"
-                                    }
-                                ],
+                                "from": { "key_code": "t" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle topmost" }],
                                 "type": "basic"
                             },
                             {
@@ -3097,14 +1329,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "p"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle border --toggle sticky --toggle topmost --toggle pip"
-                                    }
-                                ],
+                                "from": { "key_code": "p" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle border --toggle sticky --toggle topmost --toggle pip" }],
                                 "type": "basic"
                             },
                             {
@@ -3115,14 +1341,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "e"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle border"
-                                    }
-                                ],
+                                "from": { "key_code": "e" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle border" }],
                                 "type": "basic"
                             },
                             {
@@ -3133,14 +1353,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "s"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle sticky"
-                                    }
-                                ],
+                                "from": { "key_code": "s" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle sticky" }],
                                 "type": "basic"
                             },
                             {
@@ -3151,14 +1365,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "n"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle native-fullscreen"
-                                    }
-                                ],
+                                "from": { "key_code": "n" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle native-fullscreen" }],
                                 "type": "basic"
                             },
                             {
@@ -3169,14 +1377,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "m"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle zoom-fullscreen"
-                                    }
-                                ],
+                                "from": { "key_code": "m" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle zoom-fullscreen" }],
                                 "type": "basic"
                             },
                             {
@@ -3187,14 +1389,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "comma"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle zoom-parent on"
-                                    }
-                                ],
+                                "from": { "key_code": "comma" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle zoom-parent on" }],
                                 "type": "basic"
                             },
                             {
@@ -3205,14 +1401,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "u"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/toggle_space_float.sh"
-                                    }
-                                ],
+                                "from": { "key_code": "u" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/toggle_space_float.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -3223,14 +1413,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "d"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --toggle split"
-                                    }
-                                ],
+                                "from": { "key_code": "d" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --toggle split" }],
                                 "type": "basic"
                             },
                             {
@@ -3241,14 +1425,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "x"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --mirror x-axis"
-                                    }
-                                ],
+                                "from": { "key_code": "x" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --mirror x-axis" }],
                                 "type": "basic"
                             },
                             {
@@ -3259,14 +1437,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "y"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --mirror y-axis"
-                                    }
-                                ],
+                                "from": { "key_code": "y" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --mirror y-axis" }],
                                 "type": "basic"
                             },
                             {
@@ -3277,14 +1449,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "r"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/rotate_tree.sh"
-                                    }
-                                ],
+                                "from": { "key_code": "r" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/rotate_tree.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -3295,14 +1461,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "q"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/select_next_window.sh"
-                                    }
-                                ],
+                                "from": { "key_code": "q" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/select_next_window.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -3313,14 +1473,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "a"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/select_prev_window.sh"
-                                    }
-                                ],
+                                "from": { "key_code": "a" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/select_prev_window.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -3331,14 +1485,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "h"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window west --resize right:-200:0 2> /dev/null || /usr/local/bin/yabai -m window --resize right:-200:0"
-                                    }
-                                ],
+                                "from": { "key_code": "h" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window west --resize right:-200:0 2> /dev/null || /usr/local/bin/yabai -m window --resize right:-200:0" }],
                                 "type": "basic"
                             },
                             {
@@ -3349,14 +1497,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "quote"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window west --resize right:200:0 2> /dev/null || /usr/local/bin/yabai -m window --resize right:200:0"
-                                    }
-                                ],
+                                "from": { "key_code": "quote" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window west --resize right:200:0 2> /dev/null || /usr/local/bin/yabai -m window --resize right:200:0" }],
                                 "type": "basic"
                             },
                             {
@@ -3367,14 +1509,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "i"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window north --resize bottom:0:-100 2> /dev/null || /usr/local/bin/yabai -m window --resize bottom:0:-100"
-                                    }
-                                ],
+                                "from": { "key_code": "i" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window north --resize bottom:0:-100 2> /dev/null || /usr/local/bin/yabai -m window --resize bottom:0:-100" }],
                                 "type": "basic"
                             },
                             {
@@ -3385,14 +1521,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "o"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window north --resize bottom:0:100 2> /dev/null || /usr/local/bin/yabai -m window --resize bottom:0:100"
-                                    }
-                                ],
+                                "from": { "key_code": "o" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window north --resize bottom:0:100 2> /dev/null || /usr/local/bin/yabai -m window --resize bottom:0:100" }],
                                 "type": "basic"
                             },
                             {
@@ -3403,14 +1533,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "b"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --balance"
-                                    }
-                                ],
+                                "from": { "key_code": "b" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --balance" }],
                                 "type": "basic"
                             },
                             {
@@ -3421,14 +1545,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "semicolon"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m window --swap mouse"
-                                    }
-                                ],
+                                "from": { "key_code": "semicolon" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m window --swap mouse" }],
                                 "type": "basic"
                             },
                             {
@@ -3439,14 +1557,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "1"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 1"
-                                    }
-                                ],
+                                "from": { "key_code": "1" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 1" }],
                                 "type": "basic"
                             },
                             {
@@ -3457,14 +1569,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "2"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 2"
-                                    }
-                                ],
+                                "from": { "key_code": "2" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 2" }],
                                 "type": "basic"
                             },
                             {
@@ -3475,14 +1581,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "3"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 3"
-                                    }
-                                ],
+                                "from": { "key_code": "3" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 3" }],
                                 "type": "basic"
                             },
                             {
@@ -3493,14 +1593,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "4"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 4"
-                                    }
-                                ],
+                                "from": { "key_code": "4" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 4" }],
                                 "type": "basic"
                             },
                             {
@@ -3511,14 +1605,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "5"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 5"
-                                    }
-                                ],
+                                "from": { "key_code": "5" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 5" }],
                                 "type": "basic"
                             },
                             {
@@ -3529,14 +1617,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "6"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 6"
-                                    }
-                                ],
+                                "from": { "key_code": "6" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 6" }],
                                 "type": "basic"
                             },
                             {
@@ -3547,14 +1629,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "7"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 7"
-                                    }
-                                ],
+                                "from": { "key_code": "7" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 7" }],
                                 "type": "basic"
                             },
                             {
@@ -3565,14 +1641,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "8"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 8"
-                                    }
-                                ],
+                                "from": { "key_code": "8" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 8" }],
                                 "type": "basic"
                             },
                             {
@@ -3583,14 +1653,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "9"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 9"
-                                    }
-                                ],
+                                "from": { "key_code": "9" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 9" }],
                                 "type": "basic"
                             },
                             {
@@ -3601,14 +1665,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "0"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --focus 10"
-                                    }
-                                ],
+                                "from": { "key_code": "0" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --focus 10" }],
                                 "type": "basic"
                             },
                             {
@@ -3619,14 +1677,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "g"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/send_window_to_created_space.sh"
-                                    }
-                                ],
+                                "from": { "key_code": "g" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/send_window_to_created_space.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -3637,14 +1689,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "v"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/focus_sent_window_on_created_space.sh"
-                                    }
-                                ],
+                                "from": { "key_code": "v" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/focus_sent_window_on_created_space.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -3655,14 +1701,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "c"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/focus_created_space.sh; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change"
-                                    }
-                                ],
+                                "from": { "key_code": "c" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/focus_created_space.sh; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change" }],
                                 "type": "basic"
                             },
                             {
@@ -3673,14 +1713,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "z"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --create; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change"
-                                    }
-                                ],
+                                "from": { "key_code": "z" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --create; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change" }],
                                 "type": "basic"
                             },
                             {
@@ -3691,14 +1725,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "w"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/destroy_space.sh; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change"
-                                    }
-                                ],
+                                "from": { "key_code": "w" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/destroy_space.sh; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change" }],
                                 "type": "basic"
                             },
                             {
@@ -3709,14 +1737,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "hyphen"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --move prev; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change"
-                                    }
-                                ],
+                                "from": { "key_code": "hyphen" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --move prev; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change" }],
                                 "type": "basic"
                             },
                             {
@@ -3727,14 +1749,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "equal_sign"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai -m space --move next; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change"
-                                    }
-                                ],
+                                "from": { "key_code": "equal_sign" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai -m space --move next; /opt/homebrew/bin/sketchybar --trigger windows_on_spaces; /opt/homebrew/bin/sketchybar --trigger space_change" }],
                                 "type": "basic"
                             },
                             {
@@ -3747,17 +1763,9 @@
                                 ],
                                 "from": {
                                     "key_code": "period",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_shift"
-                                        ]
-                                    }
+                                    "modifiers": { "mandatory": ["left_shift"] }
                                 },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/increase_opacity_by_5.sh"
-                                    }
-                                ],
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/increase_opacity_by_5.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -3768,14 +1776,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "period"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/decrease_opacity_by_5.sh"
-                                    }
-                                ],
+                                "from": { "key_code": "period" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/decrease_opacity_by_5.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -3786,14 +1788,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "slash"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "current_opacity=$(/usr/local/bin/yabai -m query --windows --window | /opt/homebrew/bin/jq -re .opacity); [ \"$current_opacity\" = \"1\" ] && /usr/local/bin/yabai -m window --opacity 0.9 || /usr/local/bin/yabai -m window --opacity 1.0"
-                                    }
-                                ],
+                                "from": { "key_code": "slash" },
+                                "to": [{ "shell_command": "current_opacity=$(/usr/local/bin/yabai -m query --windows --window | /opt/homebrew/bin/jq -re .opacity); [ \"$current_opacity\" = \"1\" ] && /usr/local/bin/yabai -m window --opacity 0.9 || /usr/local/bin/yabai -m window --opacity 1.0" }],
                                 "type": "basic"
                             },
                             {
@@ -3804,14 +1800,8 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "grave_accent_and_tilde"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/toggle_focus_follows_mouse.sh"
-                                    }
-                                ],
+                                "from": { "key_code": "grave_accent_and_tilde" },
+                                "to": [{ "shell_command": "/Users/andrewshostak/Documents/Hobby/Programming/Projects/Scripts/Yabai/toggle_focus_follows_mouse.sh" }],
                                 "type": "basic"
                             },
                             {
@@ -3822,243 +1812,15 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": {
-                                    "key_code": "escape"
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/usr/local/bin/yabai --restart-service"
-                                    }
-                                ],
+                                "from": { "key_code": "escape" },
+                                "to": [{ "shell_command": "/usr/local/bin/yabai --restart-service" }],
                                 "type": "basic"
                             }
                         ]
                     }
                 ]
             },
-            "devices": [
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 641,
-                        "vendor_id": 1452
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": false,
-                        "is_pointing_device": true,
-                        "product_id": 641,
-                        "vendor_id": 1452
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": false,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": true,
-                        "is_pointing_device": false,
-                        "product_id": 6505,
-                        "vendor_id": 12951
-                    },
-                    "ignore": false,
-                    "manipulate_caps_lock_led": true,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                },
-                {
-                    "disable_built_in_keyboard_if_exists": false,
-                    "fn_function_keys": [],
-                    "game_pad_swap_sticks": false,
-                    "identifiers": {
-                        "is_game_pad": false,
-                        "is_keyboard": false,
-                        "is_pointing_device": true,
-                        "product_id": 6505,
-                        "vendor_id": 12951
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": false,
-                    "mouse_flip_horizontal_wheel": false,
-                    "mouse_flip_vertical_wheel": false,
-                    "mouse_flip_x": false,
-                    "mouse_flip_y": false,
-                    "mouse_swap_wheels": false,
-                    "mouse_swap_xy": false,
-                    "simple_modifications": [],
-                    "treat_as_built_in_keyboard": false
-                }
-            ],
-            "fn_function_keys": [
-                {
-                    "from": {
-                        "key_code": "f1"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "display_brightness_decrement"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f2"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "display_brightness_increment"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f3"
-                    },
-                    "to": [
-                        {
-                            "apple_vendor_keyboard_key_code": "mission_control"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f4"
-                    },
-                    "to": [
-                        {
-                            "apple_vendor_keyboard_key_code": "spotlight"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f5"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "dictation"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f6"
-                    },
-                    "to": [
-                        {
-                            "key_code": "f6"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f7"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "rewind"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f8"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "play_or_pause"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f9"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "fast_forward"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f10"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "mute"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f11"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "volume_decrement"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "f12"
-                    },
-                    "to": [
-                        {
-                            "consumer_key_code": "volume_increment"
-                        }
-                    ]
-                }
-            ],
-            "name": "Main",
-            "parameters": {
-                "delay_milliseconds_before_open_device": 1000
-            },
-            "selected": false,
-            "simple_modifications": [],
-            "virtual_hid_keyboard": {
-                "country_code": 0,
-                "indicate_sticky_modifier_keys_state": true,
-                "mouse_key_xy_scale": 100
-            }
+            "name": "Main"
         }
     ]
 }
