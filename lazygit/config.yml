@@ -1,3 +1,4 @@
+promptToReturnFromSubprocess: false
 gui:
   border: rounded
   showBottomLine: false
