@@ -4,3 +4,6 @@
 [submodule "mpv/scripts/autosubsync"]
 	path = mpv/scripts/autosubsync
 	url = https://github.com/joaquintorres/autosubsync-mpv
+[submodule "nvim"]
+	path = nvim
+	url = https://github.com/neilord/nvim-config.git
