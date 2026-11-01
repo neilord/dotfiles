@@ -2,17 +2,8 @@ promptToReturnFromSubprocess: false
 gui:
   border: rounded
   showBottomLine: false
-  theme:
-    activeBorderColor:
-      - "#73daca"
-      - bold
-    inactiveBorderColor:
-      - "#709ad2"
-      - bold
-    selectedLineBgColor:
-      - "#283457"
   nerdFontsVersion: "3"
 git:
   paging:
     colorArg: never
-    pager: delta --dark --paging=never
+    pager: delta --paging=never

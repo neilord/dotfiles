@@ -1,0 +1,15 @@
+# lazygit colors, rendered by ~/.config/theme/theme. lazygit reads it after its own config.yml
+# (LG_CONFIG_FILE in ~/.zshrc); inside Neovim, snacks adds colors taken from the colorscheme.
+gui:
+  theme:
+    activeBorderColor: ["{{teal}}", bold]
+    inactiveBorderColor: ["{{blue}}"]
+    searchingActiveBorderColor: ["{{orange}}", bold]
+    optionsTextColor: ["{{blue}}"]
+    selectedLineBgColor: ["{{selection}}"]
+    cherryPickedCommitFgColor: ["{{blue}}"]
+    cherryPickedCommitBgColor: ["{{magenta}}"]
+    markedBaseCommitFgColor: ["{{blue}}"]
+    markedBaseCommitBgColor: ["{{yellow}}"]
+    unstagedChangesColor: ["{{red}}"]
+    defaultFgColor: ["{{foreground}}"]

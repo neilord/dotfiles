@@ -1,0 +1,4 @@
+# Read by the theme script and by Neovim (lua/config/theme.lua).
+default=tokyonight-night    # until a theme is chosen
+auto_dark=tokyonight-night  # auto mode, macOS in dark mode
+auto_light=catppuccin-latte # auto mode, macOS in light mode

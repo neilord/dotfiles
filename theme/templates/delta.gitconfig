@@ -1,0 +1,15 @@
+# delta colors, rendered by ~/.config/theme/theme and included by ~/.config/git/config
+[delta]
+	{{appearance}} = true
+	syntax-theme = {{bat_theme}}
+	minus-style = syntax "{{diff_minus}}"
+	minus-non-emph-style = syntax "{{diff_minus}}"
+	minus-emph-style = syntax "{{diff_minus_emph}}"
+	minus-empty-line-marker-style = syntax "{{diff_minus}}"
+	line-numbers-minus-style = "{{red}}"
+	plus-style = syntax "{{diff_plus}}"
+	plus-non-emph-style = syntax "{{diff_plus}}"
+	plus-emph-style = syntax "{{diff_plus_emph}}"
+	plus-empty-line-marker-style = syntax "{{diff_plus}}"
+	line-numbers-plus-style = "{{green}}"
+	line-numbers-zero-style = "{{comment}}"

@@ -1,0 +1,103 @@
+# eza colors, rendered by ~/.config/theme/theme (from the Tokyo Night eza theme)
+colourful: true
+
+filekinds:
+  normal: { foreground: "{{foreground}}" }
+  directory: { foreground: "{{blue}}" }
+  symlink: { foreground: "{{teal}}" }
+  pipe: { foreground: "{{bright_black}}" }
+  block_device: { foreground: "{{yellow}}" }
+  char_device: { foreground: "{{yellow}}" }
+  socket: { foreground: "{{bright_black}}" }
+  special: { foreground: "{{purple}}" }
+  executable: { foreground: "{{green}}" }
+  mount_point: { foreground: "{{foreground}}" }
+
+perms:
+  user_read: { foreground: "{{teal}}" }
+  user_write: { foreground: "{{magenta}}" }
+  user_execute_file: { foreground: "{{green}}" }
+  user_execute_other: { foreground: "{{green}}" }
+  group_read: { foreground: "{{teal}}" }
+  group_write: { foreground: "{{orange}}" }
+  group_execute: { foreground: "{{green}}" }
+  other_read: { foreground: "{{teal}}" }
+  other_write: { foreground: "{{red}}" }
+  other_execute: { foreground: "{{green}}" }
+  special_user_file: { foreground: "{{red}}" }
+  special_other: { foreground: "{{red}}" }
+  attribute: { foreground: "{{comment}}" }
+
+size:
+  major: { foreground: "{{teal}}" }
+  minor: { foreground: "{{purple}}" }
+  number_byte: { foreground: "{{white}}" }
+  number_kilo: { foreground: "{{cyan}}" }
+  number_mega: { foreground: "{{teal}}" }
+  number_giga: { foreground: "{{orange}}" }
+  number_huge: { foreground: "{{red}}" }
+  unit_byte: { foreground: "{{white}}" }
+  unit_kilo: { foreground: "{{cyan}}" }
+  unit_mega: { foreground: "{{teal}}" }
+  unit_giga: { foreground: "{{orange}}" }
+  unit_huge: { foreground: "{{red}}" }
+
+users:
+  user_you: { foreground: "{{comment}}" }
+  user_root: { foreground: "{{magenta}}" }
+  user_other: { foreground: "{{teal}}" }
+  group_yours: { foreground: "{{cyan}}" }
+  group_root: { foreground: "{{magenta}}" }
+  group_other: { foreground: "{{foreground}}" }
+
+links:
+  normal: { foreground: "{{cyan}}" }
+  multi_link_file: { foreground: "{{teal}}" }
+
+git:
+  new: { foreground: "{{green}}" }
+  modified: { foreground: "{{magenta}}" }
+  deleted: { foreground: "{{red}}" }
+  renamed: { foreground: "{{teal}}" }
+  typechange: { foreground: "{{teal}}" }
+  ignored: { foreground: "{{comment}}" }
+  conflicted: { foreground: "{{orange}}" }
+
+git_repo:
+  branch_main: { foreground: "{{comment}}" }
+  branch_other: { foreground: "{{foreground}}" }
+  git_clean: { foreground: "{{selection}}" }
+  git_dirty: { foreground: "{{magenta}}" }
+
+security_context:
+  colon: { foreground: "{{comment}}" }
+  user: { foreground: "{{comment}}" }
+  role: { foreground: "{{teal}}" }
+  typ: { foreground: "{{comment}}" }
+  range: { foreground: "{{purple}}" }
+
+file_type:
+  image: { foreground: "{{cyan}}" }
+  video: { foreground: "{{foreground}}" }
+  music: { foreground: "{{teal}}" }
+  lossless: { foreground: "{{teal}}" }
+  crypto: { foreground: "{{red}}" }
+  document: { foreground: "{{white}}" }
+  compressed: { foreground: "{{orange}}" }
+  temp: { foreground: "{{comment}}" }
+  compiled: { foreground: "{{comment}}" }
+  build: { foreground: "{{teal}}" }
+  source: { foreground: "{{magenta}}" }
+
+punctuation: { foreground: "{{selection}}" }
+date: { foreground: "{{yellow}}" }
+inode: { foreground: "{{comment}}" }
+blocks: { foreground: "{{comment}}" }
+header: { foreground: "{{white}}" }
+octal: { foreground: "{{orange}}" }
+flags: { foreground: "{{purple}}" }
+
+symlink_path: { foreground: "{{cyan}}" }
+control_char: { foreground: "{{orange}}" }
+broken_symlink: { foreground: "{{red}}" }
+broken_path_overlay: { foreground: "{{red}}" }

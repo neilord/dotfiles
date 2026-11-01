@@ -1,0 +1,178 @@
+#!/usr/bin/env bash
+# One theme for the terminal, tmux, Neovim and the command-line tools.
+#
+#   theme                  print the chosen theme and the one in use
+#   theme list             print the theme names
+#   theme set <name|auto>  choose a theme; auto follows macOS light / dark mode
+#   theme sync             apply the theme again (run by tmux on attach and by the macOS watcher)
+#   theme install-watcher  build and start the background watcher that runs sync on light / dark changes
+#
+# themes/<name>.sh holds a theme's colors, and is the only place they live. Applying a theme:
+#   - renders every file in templates/ into $state, replacing {{name}} with the theme's colors; each
+#     tool points at its rendered file once (see README.md)
+#   - recolors every open terminal window by writing escape sequences to its tty
+#   - sets tmux's bar colors
+#   - writes the theme's name to $state/current, which Neovim and zsh watch
+set -euo pipefail
+
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH" # launchd starts the watcher without Homebrew on PATH
+
+dir="$(cd "$(dirname "$0")" && pwd)"
+state="${THEME_STATE:-${XDG_STATE_HOME:-$HOME/.local/state}/theme}"
+read -r -a tmux_cmd <<< "tmux ${THEME_TMUX_ARGS:-}" # THEME_TMUX_ARGS="-L test" points the tests at another server
+source "$dir/config"
+
+ansi=(black red green yellow blue magenta cyan white
+    bright_black bright_red bright_green bright_yellow bright_blue bright_magenta bright_cyan bright_white)
+
+themes() { for f in "$dir"/themes/*.sh; do basename "$f" .sh; done; }
+
+chosen() { cat "$state/chosen" 2>/dev/null || echo "$default"; }
+
+resolve() {
+    local name
+    name="$(chosen)"
+    if [[ $name == auto ]]; then
+        if [[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" == Dark ]]; then
+            name="$auto_dark"
+        else
+            name="$auto_light"
+        fi
+    fi
+    echo "$name"
+}
+
+# blend <fg> <bg> <percent of fg>
+blend() {
+    local fg=${1#\#} bg=${2#\#} pct=$3 out="#" i part
+    for i in 0 2 4; do
+        printf -v part '%02x' $(((16#${fg:i:2} * pct + 16#${bg:i:2} * (100 - pct) + 50) / 100))
+        out+=$part
+    done
+    echo "$out"
+}
+
+# #rrggbb as rgb:rr/gg/bb, the form every terminal accepts (iTerm2 ignores #rrggbb)
+rgb() {
+    local hex=${1#\#}
+    echo "rgb:${hex:0:2}/${hex:2:2}/${hex:4:2}"
+}
+
+load() {
+    set -a # export every color, for the template renderer
+    source "$dir/themes/$1.sh"
+    diff_minus=$(blend "$red" "$background" 20)
+    diff_minus_emph=$(blend "$red" "$background" 35)
+    diff_plus=$(blend "$green" "$background" 20)
+    diff_plus_emph=$(blend "$green" "$background" 35)
+    on_accent_dim=$(blend "$on_accent" "$accent" 75)
+    set +a
+}
+
+render() {
+    local template out
+    while IFS= read -r template; do
+        out="$state/${template#"$dir/templates/"}"
+        mkdir -p "$(dirname "$out")"
+        perl -pe 's/\{\{(\w+)\}\}/exists $ENV{$1} ? $ENV{$1} : die "unknown {{$1}} in $ARGV\n"/ge' \
+            "$template" > "$out.tmp"
+        mv "$out.tmp" "$out"
+    done < <(find "$dir/templates" -type f)
+}
+
+# OSC 4 sets the 16 ANSI colors, 10/11/12/17 foreground, background, cursor and selection. iTerm2
+# gets its own SetColors too, which also covers the cursor text and bold colors.
+terminal_colors() {
+    local i name
+    for i in "${!ansi[@]}"; do
+        name=${ansi[$i]}
+        printf '\e]4;%d;%s\a' "$i" "$(rgb "${!name}")"
+    done
+    printf '\e]10;%s\a\e]11;%s\a\e]12;%s\a\e]17;%s\a' \
+        "$(rgb "$foreground")" "$(rgb "$background")" "$(rgb "$cursor")" "$(rgb "$selection")"
+    local key value
+    for key in fg=foreground bg=background bold=foreground curbg=cursor curfg=background selbg=selection selfg=foreground; do
+        value=${key#*=}
+        value=${!value}
+        printf '\e]1337;SetColors=%s=%s\a' "${key%%=*}" "${value#\#}"
+    done
+}
+
+# the ttys of every terminal window: tmux clients, and the login shells terminals start
+terminal_ttys() {
+    {
+        "${tmux_cmd[@]}" list-clients -F '#{client_tty}' 2>/dev/null || true
+        [[ -n ${THEME_TMUX_ARGS:-} ]] || ps -axo tty=,comm= | awk '$2 ~ /(^|\/)login$/ && $1 != "??" { print "/dev/" $1 }'
+    } | sort -u
+}
+
+apply() {
+    local name="$1" tty
+    load "$name"
+    mkdir -p "$state"
+    render
+    terminal_colors > "$state/terminal.seq" # zsh replays it in new windows outside tmux
+
+    while read -r tty; do
+        [[ -w $tty ]] && terminal_colors > "$tty" || true
+    done < <(terminal_ttys)
+
+    if "${tmux_cmd[@]}" has-session 2>/dev/null; then
+        "${tmux_cmd[@]}" set -g @thm_accent "$accent" \; set -g @thm_surface "$surface" \; \
+            set -g @thm_dark "$dark" \; set -g @thm_muted "$muted" \; set -g @thm_on_accent "$on_accent" \; \
+            set -g mode-style "fg=$accent,bg=$surface" \; set -g message-style "fg=$accent,bg=$surface" \; \
+            set -g message-command-style "fg=$accent,bg=$surface" \; \
+            set -g pane-border-style "fg=$surface" \; set -g pane-active-border-style "fg=$accent"
+        while read -r tty; do
+            "${tmux_cmd[@]}" refresh-client -t "$tty" -S
+        done < <("${tmux_cmd[@]}" list-clients -F '#{client_tty}')
+    fi
+
+    # last, and only on a change, so every Neovim doesn't reload its colorscheme on each tmux attach
+    if [[ "$(cat "$state/current" 2>/dev/null)" != "$name" ]]; then
+        echo "$name" > "$state/current.tmp"
+        mv "$state/current.tmp" "$state/current"
+    fi
+}
+
+install_watcher() {
+    local bin="$state/appearance-watch" plist="$HOME/Library/LaunchAgents/local.theme.appearance-watch.plist"
+    mkdir -p "$state"
+    swiftc -O "$dir/appearance-watch.swift" -o "$bin"
+    cat > "$plist" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key><string>local.theme.appearance-watch</string>
+    <key>ProgramArguments</key><array><string>$bin</string><string>$dir/theme</string></array>
+    <key>RunAtLoad</key><true/>
+    <key>KeepAlive</key><true/>
+</dict>
+</plist>
+EOF
+    launchctl bootout "gui/$(id -u)" "$plist" 2>/dev/null || true
+    launchctl bootstrap "gui/$(id -u)" "$plist"
+    echo "watcher running: $plist"
+}
+
+case "${1:-}" in
+    "") echo "chosen: $(chosen), in use: $(resolve)" ;;
+    list) themes ;;
+    set)
+        name="${2:?usage: theme set <name|auto>}"
+        if [[ $name != auto && ! -f "$dir/themes/$name.sh" ]]; then
+            echo "unknown theme: $name (try: theme list)" >&2
+            exit 1
+        fi
+        mkdir -p "$state"
+        echo "$name" > "$state/chosen"
+        apply "$(resolve)"
+        ;;
+    sync) apply "$(resolve)" ;;
+    install-watcher) install_watcher ;;
+    *)
+        sed -n '3,8s/^# \{0,1\}//p' "$0" >&2
+        exit 1
+        ;;
+esac
