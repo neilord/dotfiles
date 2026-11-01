@@ -7,12 +7,14 @@
 	excludesfile = ~/.config/git/ignore
 	editor = nvim
 	pager = delta
+	quotepath = false # show non-ASCII file names as they are
 [interactive]
 	diffFilter = delta --color-only
 [merge]
-	conflictstyle = diff3
+	conflictstyle = zdiff3
 [diff]
 	colorMoved = default
+	algorithm = histogram
 [pull]
 	ff = true
 [init]
@@ -29,3 +31,15 @@
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [fetch]
 	prune = true
+[push]
+	autoSetupRemote = true
+[rebase]
+	autoStash = true
+[rerere]
+	enabled = true # reuse recorded conflict resolutions
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[delta]
+	navigate = true # n / N jump between files in a diff

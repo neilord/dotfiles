@@ -21,7 +21,6 @@ yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info
 yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
 
 # Custom apps settings
-yabai -m rule --add app="^mpv$" border=off
 yabai -m rule --add app="^Finder$" manage=off #opacity=0.8
 
 yabai -m signal --add event=window_created app="^(Arc|mpv)$" \
