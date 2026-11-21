@@ -56,7 +56,7 @@ and Homebrew Bundle delegates `browser-use` to uv.
 | Editor and Git | Neovim, Git, GitHub CLI, Lazygit, delta, macOS SSH |
 | Development | Xcode Command Line Tools, Node 24, nvm, pnpm, Docker Desktop with Compose, uv |
 | AI coding | Codex CLI, Claude Code, and browser-use via uv |
-| Desktop | Aside (primary browser), Google Chrome, Postman, Windows App, Outline, Raycast, Dayflow, ChatGPT, Claude, Karabiner-Elements, yabai |
+| Desktop | Aside (primary browser), Google Chrome, Postman, Windows App, Outline VPN (Mac App Store), Raycast, Dayflow, ChatGPT, Claude, Karabiner-Elements, yabai |
 | Media | mpv, ffmpeg for subtitle sync |
 | Network and payments | Tailscale, Stripe CLI |
 

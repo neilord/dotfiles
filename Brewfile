@@ -45,7 +45,7 @@ cask "aside"
 cask "google-chrome"
 cask "postman"
 cask "windows-app"
-cask "outline"
+mas "Outline App", id: 1356178125
 cask "docker-desktop"
 cask "codex"
 cask "claude-code"
