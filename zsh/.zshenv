@@ -8,9 +8,6 @@ path=(
   "$HOME/.local/bin"(N/)
   /opt/homebrew/bin(N/)
   /opt/homebrew/sbin(N/)
-  "$HOME/.cargo/bin"(N/)
-  "$HOME/.deno/bin"(N/)
-  /usr/local/smlnj/bin(N/)
   "$path[@]"
 )
 if [[ -n $NVM_BIN && -x $NVM_BIN/node ]]; then
