@@ -39,6 +39,11 @@ a config edits the repo.
 Add a package: create `<name>/.config/<name>/`, move the config in, add it to `packages` in
 `install.sh` and run `stow -t ~ <name>`. Remove one: `stow -D -t ~ <name>`, then delete the folder.
 
+The active Karabiner profiles are tracked here, and their window shortcuts use the helper scripts
+in the `yabai` package. If you regenerate Karabiner rules from the separate Moonlander firmware
+checkout, check that the generated shortcuts still point to the helpers under `~/.config/yabai`.
+The SketchyBar shortcuts require a separate SketchyBar install.
+
 ## Tool index
 
 The [Brewfile](Brewfile) is the source of truth for Homebrew installs.
