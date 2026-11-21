@@ -56,7 +56,7 @@ and Homebrew Bundle delegates `browser-use` to uv.
 | Editor and Git | Neovim, Git, GitHub CLI, Lazygit, delta, macOS SSH |
 | Development | Xcode Command Line Tools, Node 24, nvm, pnpm, Docker Desktop with Compose, uv |
 | AI coding | Codex CLI, Claude Code, and browser-use via uv |
-| Desktop | Aside (primary browser), Google Chrome, Postman, Windows App, Outline, Raycast, ChatGPT, Claude, Karabiner-Elements, yabai |
+| Desktop | Aside (primary browser), Google Chrome, Postman, Windows App, Outline, Raycast, Dayflow, ChatGPT, Claude, Karabiner-Elements, yabai |
 | Media | mpv, ffmpeg for subtitle sync |
 | Network and payments | Tailscale, Stripe CLI |
 
@@ -67,6 +67,7 @@ and Homebrew Bundle delegates `browser-use` to uv.
 3. Open Aside and sign in. Launch Docker Desktop once to initialize the engine and Compose.
 4. Sign in to GitHub, Codex, Claude Code, and other apps you use. Restore SSH access and grant
    the macOS permissions needed by Karabiner-Elements and yabai.
+   Restore CleanMyMac X through MacPaw if needed. The Homebrew cask installs CleanMyMac 5.
 5. In each project, check `node --version` and `pnpm --version` against its declared requirements.
 
 ### Shell conventions
