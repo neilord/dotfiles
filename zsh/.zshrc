@@ -9,15 +9,11 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR="nvim"
 export ESLINT_USE_FLAT_CONFIG=true
 export NVM_DIR="/opt/homebrew/opt/nvm"
-export ANDROID_HOME="$HOME/Library/Android/sdk"
-export ANDROID_SDK_ROOT="$ANDROID_HOME"
 export ANDROID_AVD_HOME="$HOME/.config/.android/avd"
 
 typeset -U path # no duplicate entries
 path=(
   $HOME/nvim-macos/bin # Neovim nightly
-  $ANDROID_HOME/platform-tools
-  $ANDROID_HOME/emulator
   /usr/local/smlnj/bin
   $path
 )
