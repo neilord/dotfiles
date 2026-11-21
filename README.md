@@ -68,6 +68,7 @@ and Homebrew Bundle delegates `browser-use` to uv.
 4. Sign in to GitHub, Codex, Claude Code, and other apps you use. Restore SSH access and grant
    the macOS permissions needed by Karabiner-Elements and yabai.
    Restore CleanMyMac X through MacPaw if needed. The Homebrew cask installs CleanMyMac 5.
+   Restore [qBittorrent](https://www.qbittorrent.org/download) from its publisher. Its Homebrew cask is disabled.
 5. In each project, check `node --version` and `pnpm --version` against its declared requirements.
 
 ### Shell conventions
