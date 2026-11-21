@@ -76,7 +76,6 @@ export NODE_AUTH_TOKEN="$(gh auth token)" # GitHub Packages in .npmrc
 ## aliases
 alias vim='nvim'
 alias cat='bat'
-alias rm='rip'
 alias oc='ocv'
 alias ssh="TERM=xterm-256color ssh"
 alias hold="pbpaste > /tmp/hold_clip"

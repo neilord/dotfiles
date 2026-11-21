@@ -1,7 +1,8 @@
 # What these dotfiles need, installed with `brew bundle` (install.sh runs it).
-# Not every package on the machine: only the tools configured here and what they call.
+# Tools and apps to restore on a fresh Mac.
 
 tap "asmvik/formulae" # yabai
+tap "stripe/stripe-cli"
 
 # dotfiles
 brew "stow"
@@ -11,8 +12,6 @@ brew "zsh"
 brew "zoxide"      # cd, in .zshrc
 brew "eza"         # ls
 brew "bat"         # cat
-brew "rm-improved" # rm, as rip
-brew "nvm"
 brew "gh"          # git credentials and NODE_AUTH_TOKEN
 
 # editor and terminal
@@ -21,7 +20,13 @@ brew "ripgrep"     # Neovim pickers
 brew "fd"
 brew "fzf"
 brew "jq"          # yabai signals
-brew "node@24"     # language servers Mason installs
+# development
+brew "nvm"
+brew "node@24"
+brew "pnpm"
+brew "uv"
+brew "stripe/stripe-cli/stripe"
+brew "tailscale"
 
 # git
 brew "git"
@@ -35,6 +40,14 @@ brew "asmvik/formulae/yabai"
 brew "ffmpeg"      # autosubsync
 brew "socat"       # pausePlay.sh
 
+# desktop and AI coding
+cask "aside"
+cask "docker-desktop"
+cask "codex"
+cask "claude-code"
+cask "chatgpt"
+cask "claude"
+cask "raycast"
 cask "iterm2"
 cask "karabiner-elements"
 cask "stolendata-mpv"
