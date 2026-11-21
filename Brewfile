@@ -2,6 +2,7 @@
 # Tools and apps to restore on a fresh Mac.
 
 tap "asmvik/formulae" # yabai
+tap "felixkratz/formulae" # SketchyBar
 tap "stripe/stripe-cli"
 
 # dotfiles
@@ -36,6 +37,7 @@ brew "lazygit"
 
 # window management
 brew "asmvik/formulae/yabai"
+brew "felixkratz/formulae/sketchybar"
 
 # mpv
 brew "ffmpeg"      # autosubsync
@@ -45,15 +47,26 @@ cask "aside"
 cask "google-chrome"
 cask "postman"
 cask "windows-app"
-mas "Outline App", id: 1356178125
 cask "docker-desktop"
+cask "gcloud-cli"
 cask "codex"
 cask "claude-code"
 cask "chatgpt"
 cask "claude"
 cask "raycast"
 cask "dayflow"
+cask "wispr-flow"
+cask "scroll"
+cask "anki"
+cask "qbittorrent"
+cask "textsniper"
 cask "iterm2"
 cask "karabiner-elements"
 cask "stolendata-mpv"
 cask "font-jetbrains-mono-nerd-font"
+
+# Mac App Store
+mas "Outline App", id: 1356178125
+mas "Presentify", id: 1507246666
+mas "Telegram", id: 747648890
+mas "WhatsApp", id: 310633997

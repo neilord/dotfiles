@@ -42,7 +42,7 @@ Add a package: create `<name>/.config/<name>/`, move the config in, add it to `p
 The active Karabiner profiles are tracked here, and their window shortcuts use the helper scripts
 in the `yabai` package. If you regenerate Karabiner rules from the separate Moonlander firmware
 checkout, check that the generated shortcuts still point to the helpers under `~/.config/yabai`.
-The SketchyBar shortcuts require a separate SketchyBar install.
+The Brewfile includes SketchyBar for the keyboard shortcuts.
 
 ## Tool index
 
@@ -54,9 +54,9 @@ and Homebrew Bundle delegates `browser-use` to uv.
 | Shell and terminal | zsh, Oh My Zsh, Powerlevel10k, iTerm2, tmux, JetBrains Mono Nerd Font, Stow |
 | Search and shell utilities | ripgrep (`rg`), fd, fzf, eza, bat, zoxide, jq |
 | Editor and Git | Neovim, Git, GitHub CLI, Lazygit, delta, macOS SSH |
-| Development | Xcode Command Line Tools, Node 24, nvm, pnpm, Docker Desktop with Compose, uv |
+| Development | Xcode Command Line Tools, Node 24, nvm, pnpm, Docker Desktop with Compose, uv, Google Cloud CLI |
 | AI coding | Codex CLI, Claude Code, and browser-use via uv |
-| Desktop | Aside (primary browser), Google Chrome, Postman, Windows App, Outline VPN (Mac App Store), Raycast, Dayflow, ChatGPT, Claude, Karabiner-Elements, yabai |
+| Desktop | Aside (primary browser), Google Chrome, Postman, Windows App, Outline VPN (Mac App Store), Raycast, Dayflow, ChatGPT, Claude, Karabiner-Elements, yabai, SketchyBar, Wispr Flow, Scroll, Anki, qBittorrent, TextSniper, Presentify, Telegram, WhatsApp |
 | Media | mpv, ffmpeg for subtitle sync |
 | Network and payments | Tailscale, Stripe CLI |
 
