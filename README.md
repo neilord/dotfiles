@@ -70,9 +70,10 @@ The [Brewfile](Brewfile) is the source of truth for Homebrew installs.
 
 ### Shell conventions
 
-Standard commands such as `cd`, `ls`, `cat`, and `ssh` keep their normal behavior. Use
-`z` for zoxide, `eza` for enhanced listings, and `bat` for highlighted file previews.
-Interactive zsh provides `vim` for Neovim, `lg` for Lazygit, and `ll`, `la`, and `lt` for eza.
+In an interactive terminal, `ls` uses eza and `cd` uses zoxide when available. Use
+`command ls` or `builtin cd` for the original behavior. Scripts, command-mode shells,
+and shells with Codex or Claude Code environment markers use the standard commands.
+Interactive zsh also provides `vim` for Neovim and `lg` for Lazygit.
 
 Node 24 is the default. For another version, load nvm on demand and run `nvm use`.
 
