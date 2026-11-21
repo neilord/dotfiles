@@ -51,7 +51,7 @@ The [Brewfile](Brewfile) is the source of truth for Homebrew installs.
 | Development | Xcode Command Line Tools, Node 24, nvm, pnpm, Docker Desktop with Compose, uv |
 | AI coding | Codex CLI and Claude Code |
 | Desktop | Aside (primary browser), Raycast, ChatGPT, Claude, Karabiner-Elements, yabai |
-| Media | mpv, ffmpeg for subtitle sync, socat for the mpv pause/play shortcut |
+| Media | mpv, ffmpeg for subtitle sync |
 | Network and payments | Tailscale, Stripe CLI |
 
 ### Fresh Mac checklist

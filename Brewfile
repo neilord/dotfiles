@@ -38,7 +38,6 @@ brew "asmvik/formulae/yabai"
 
 # mpv
 brew "ffmpeg"      # autosubsync
-brew "socat"       # pausePlay.sh
 
 # desktop and AI coding
 cask "aside"
