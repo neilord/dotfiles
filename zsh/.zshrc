@@ -56,6 +56,3 @@ fi
 # Convenience shortcuts for interactive use.
 (( $+commands[nvim] )) && alias vim=nvim
 alias lg=lazygit
-alias ll='eza -lbF --git'
-alias la='eza -la --git'
-alias lt='eza --tree --level=2'
