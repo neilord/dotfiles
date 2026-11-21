@@ -46,7 +46,8 @@ The SketchyBar shortcuts require a separate SketchyBar install.
 
 ## Tool index
 
-The [Brewfile](Brewfile) is the source of truth for Homebrew installs.
+The [Brewfile](Brewfile) is the install registry. Homebrew manages formulae and casks,
+and Homebrew Bundle delegates `browser-use` to uv.
 
 | Area | Tools to restore |
 |---|---|
@@ -54,8 +55,8 @@ The [Brewfile](Brewfile) is the source of truth for Homebrew installs.
 | Search and shell utilities | ripgrep (`rg`), fd, fzf, eza, bat, zoxide, jq |
 | Editor and Git | Neovim, Git, GitHub CLI, Lazygit, delta, macOS SSH |
 | Development | Xcode Command Line Tools, Node 24, nvm, pnpm, Docker Desktop with Compose, uv |
-| AI coding | Codex CLI and Claude Code |
-| Desktop | Aside (primary browser), Raycast, ChatGPT, Claude, Karabiner-Elements, yabai |
+| AI coding | Codex CLI, Claude Code, and browser-use via uv |
+| Desktop | Aside (primary browser), Google Chrome, Postman, Windows App, Outline, Raycast, ChatGPT, Claude, Karabiner-Elements, yabai |
 | Media | mpv, ffmpeg for subtitle sync |
 | Network and payments | Tailscale, Stripe CLI |
 

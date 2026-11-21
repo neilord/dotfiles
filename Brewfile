@@ -25,6 +25,7 @@ brew "nvm"
 brew "node@24"
 brew "pnpm"
 brew "uv"
+uv "browser-use"
 brew "stripe/stripe-cli/stripe"
 brew "tailscale"
 
@@ -41,6 +42,10 @@ brew "ffmpeg"      # autosubsync
 
 # desktop and AI coding
 cask "aside"
+cask "google-chrome"
+cask "postman"
+cask "windows-app"
+cask "outline"
 cask "docker-desktop"
 cask "codex"
 cask "claude-code"
