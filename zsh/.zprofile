@@ -1,3 +1,2 @@
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-export PATH="$PATH:$HOME/.local/bin" # pipx
+# macOS path_helper runs between .zshenv and .zprofile.
+source "${ZDOTDIR:-$HOME}/.zshenv"

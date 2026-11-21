@@ -68,6 +68,24 @@ The [Brewfile](Brewfile) is the source of truth for Homebrew installs.
    the macOS permissions needed by Karabiner-Elements and yabai.
 5. In each project, check `node --version` and `pnpm --version` against its declared requirements.
 
+### Shell conventions
+
+Standard commands such as `cd`, `ls`, `cat`, and `ssh` keep their normal behavior. Use
+`z` for zoxide, `eza` for enhanced listings, and `bat` for highlighted file previews.
+Interactive zsh provides `vim` for Neovim, `lg` for Lazygit, and `ll`, `la`, and `lt` for eza.
+
+Node 24 is the default. For another version, load nvm on demand and run `nvm use`.
+
+```sh
+source /opt/homebrew/opt/nvm/nvm.sh --no-use
+```
+
+The Homebrew loader uses `~/.nvm` by default. To access versions previously installed under
+`/opt/homebrew/opt/nvm`, export that directory as `NVM_DIR` before loading nvm.
+
+For projects whose `.npmrc` uses GitHub Packages, run `gh auth login` as needed, then scope
+the token to the install command with `NODE_AUTH_TOKEN="$(gh auth token)" pnpm install`.
+
 Add a tool to the Brewfile when it belongs on a fresh Mac, even if it needs no config. Add
 a Stow package when there are settings to maintain. For tools installed outside Homebrew,
 record the install method here. Keep project-specific runtime constraints and Compose services
